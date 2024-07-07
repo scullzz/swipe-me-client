@@ -8,22 +8,25 @@ const Main = () => {
   const getUserData = () => {
     const data = tg.initDataUnsafe?.user || {};
     setUserData(data);
-    fetchUserProfilePhoto(data.id);
+    if (data.id) {
+      fetchUserProfilePhoto(data.id);
+    }
   };
 
   const fetchUserProfilePhoto = async (userId) => {
     try {
       const response = await fetch(
-        `https://api.telegram.org/bot<1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o>/getUserProfilePhotos?user_id=${userId}`
+        `https://api.telegram.org/bot1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o/getUserProfilePhotos?user_id=${userId}`
       );
       const data = await response.json();
-      if (data.result.photos.length > 0) {
+
+      if (data.result?.photos?.length > 0) {
         const fileId = data.result.photos[0][0].file_id;
         const fileResponse = await fetch(
-          `https://api.telegram.org/bot<1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o>/getFile?file_id=${fileId}`
+          `https://api.telegram.org/bot1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o/getFile?file_id=${fileId}`
         );
         const fileData = await fileResponse.json();
-        const fileUrl = `https://api.telegram.org/file/bot<1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o>/${fileData.result.file_path}`;
+        const fileUrl = `https://api.telegram.org/file/bot1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o/${fileData.result.file_path}`;
         setUserPhoto(fileUrl);
       }
     } catch (error) {
