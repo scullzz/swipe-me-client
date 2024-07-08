@@ -1,0 +1,35 @@
+.Navigation {
+  position: fixed;
+  bottom: 0;
+  background-color: #141414;
+  width: 375px;
+  height: 74px;
+  left: 0;
+}
+.Navigation_Limit {
+  width: 359px;
+  height: 74px;
+  margin: 0 auto;
+}
+.Navigation_Flex {
+  padding-top: 2px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.Flex_Item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Navigation_Text {
+  color: white;
+  font-size: 11px;
+}
+.Navigation_Text_Clicked {
+  color: #04bfbf;
+  font-size: 11px;
+}
