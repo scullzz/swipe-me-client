@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../navigation-panel/Navigation";
 
 const AboutMe = () => {
   const [userData, setUserData] = useState(null);
@@ -62,9 +61,6 @@ const AboutMe = () => {
         <p>Загрузка данных пользователя...</p>
       )}
 
-      <div>
-        <Navigation />
-      </div>
     </div>
   );
 };

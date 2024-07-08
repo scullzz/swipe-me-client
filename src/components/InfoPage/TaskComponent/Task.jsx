@@ -1,7 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-export function Task() {
-    return (
-        
-    );
+const Task = () => {
+  return (
+    <div>
+      
+    </div>
+  )
 }
+
+export default Task

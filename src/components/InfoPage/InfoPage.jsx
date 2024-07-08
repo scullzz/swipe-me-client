@@ -22,7 +22,6 @@ export function InfoPage() {
                     </div>
                 </div>
             </div>
-            {}
         </div>
     );
 }
