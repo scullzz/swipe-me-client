@@ -2,7 +2,6 @@
   position: fixed;
   bottom: 0;
   background-color: #141414;
-  width: 375px;
   height: 74px;
   left: 0;
 }
@@ -32,4 +31,8 @@
 .Navigation_Text_Clicked {
   color: #04bfbf;
   font-size: 11px;
+}
+
+.OutletContainer {
+  max-width: 380px;
 }

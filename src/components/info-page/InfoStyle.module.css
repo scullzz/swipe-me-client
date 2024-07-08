@@ -1,7 +1,5 @@
 .page_container{
-    height: 805px;
     display: flex;
-    width: 375px;
     background-color: #141414;
     color: white;
 }

@@ -53,7 +53,9 @@ const Navigation = () => {
 
   return (
     <div>
-      <Outlet/>
+      <div className={style.OutletContainer}>
+        <Outlet />
+      </div>
       <div className={style.Navigation}>
         <div className={style.Navigation_Limit}>
           <div className={style.Navigation_Flex}>
