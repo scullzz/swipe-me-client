@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Navigation from "../navigation-panel/Navigation";
 
-const Main = () => {
+const AboutMe = () => {
   const [userData, setUserData] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
   const tg = window.Telegram.WebApp;
@@ -60,8 +61,12 @@ const Main = () => {
       ) : (
         <p>Загрузка данных пользователя...</p>
       )}
+
+      <div>
+        <Navigation />
+      </div>
     </div>
   );
 };
 
-export default Main;
+export default AboutMe;
