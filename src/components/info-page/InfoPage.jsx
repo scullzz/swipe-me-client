@@ -24,9 +24,9 @@ export function InfoPage() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={style.task_container}>
+                <div className={style.task_container}>
                     <Task/>
+                </div>
             </div>
         </div>
     );
