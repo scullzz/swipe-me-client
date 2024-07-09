@@ -25,6 +25,9 @@ export function InfoPage() {
                     </div>
                 </div>
                 <div className={style.task_container}>
+                    {
+                        Array(5).fill(null).map((_, index) => <Task key={index}/>)
+                    }
                     <Task/>
                 </div>
             </div>
