@@ -1,0 +1,17 @@
+.Main_Cooperation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 49px;
+  margin-bottom: 15px;
+}
+.Cooperation_Text {
+  font-size: 14px;
+  color: white;
+}
+
+.Cooperation_Link {
+  font-size: 14px;
+  color: rgb(135, 190, 235);
+}

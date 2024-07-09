@@ -4,6 +4,7 @@
   background-color: #141414;
   height: 74px;
   left: 0;
+  width: 375px;
 }
 .Navigation_Limit {
   width: 359px;
@@ -34,5 +35,5 @@
 }
 
 .OutletContainer {
-  max-width: 380px;
+  max-width: 390px;
 }

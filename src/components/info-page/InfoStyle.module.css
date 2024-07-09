@@ -1,61 +1,69 @@
-.page_container, .task_container{
-    display: flex;
-    flex-direction: column;
-    background-color: #141414;
-    color: white;
+.page_container {
+  position: fixed;
+  height: 725px;
+  overflow: scroll;
+  width: 375px;
+}
+.page_container,
+.task_container {
+  display: flex;
+  flex-direction: column;
+  background-color: #141414;
+  color: white;
 }
 
-.task_container{
-    margin-top: 7px;
-    align-items: center;
-    justify-content: center;
+.task_container {
+  margin-top: 7px;
+  align-items: center;
+  justify-content: center;
 }
 
-.info_container{
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 359px;
-    /* height: 291px; */
-    height: 100%;
-    background-color: #242424;
-    border-radius: 10px 10px 0 0;
-    margin-top: 48px;
+.info_container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 359px;
+  /* height: 291px; */
+  height: 100%;
+  background-color: #242424;
+  border-radius: 10px 10px 0 0;
+  margin-top: 48px;
 }
 
-.info_description{
-    margin-top: 29px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex;;
+.info_description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex;
+  bottom: 23px;
 }
 
-.logo{
-    position: absolute;
-    top: 10px;
-    width: 74px;
-    height: 74px;
+.logo {
+  position: relative;
+  bottom: 39px;
+  width: 74px;
+  height: 74px;
 }
 
-.title{
-    height: 45px;
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
+.title {
+  height: 45px;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
 }
 
-.description_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 15px;
+.description_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
 }
 
-.description{
-    padding: 0 9px;
-    font-size: 15px;
-    color: #999999;
+.description {
+  padding: 0 9px;
+  font-size: 15px;
+  color: #999999;
 }
