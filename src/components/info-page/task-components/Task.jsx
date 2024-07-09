@@ -13,7 +13,7 @@ const Task = () => {
 
   return (
     <div className={style.task_container}>
-      <div className={style.task}>
+      <div className={style.task} onClick={handleToggle}>
         <div className={style.task_main_info}>
           <img src={done_task} alt="done_task" className={style.task_icon_status} />
           <div className={style.title_date_wrapper}>
@@ -26,9 +26,7 @@ const Task = () => {
             <p>Q1</p>
             <p>2024</p>
           </div>
-          <button className={style.arrow_btn} onClick={handleToggle}>
-            <img src={isOpen ? open_arrow : closed_arrow} alt="toggle_arrow" />
-          </button>
+          <img src={isOpen ? open_arrow : closed_arrow} alt="toggle_arrow" />
         </div>
       </div>
       {isOpen && (
