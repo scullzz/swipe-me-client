@@ -3,10 +3,12 @@
   bottom: 0;
   background-color: #141414;
   height: 74px;
-  left: 0;
   width: 375px;
 }
 .Navigation_Limit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 359px;
   height: 74px;
   margin: 0 auto;
@@ -35,5 +37,5 @@
 }
 
 .OutletContainer {
-  max-width: 390px;
+  width: 100%;
 }

@@ -1,8 +1,8 @@
 .page_container {
+  padding: 8px;
   position: fixed;
   height: 100%;
   overflow: scroll;
-  width: 375px;
 }
 .page_container,
 .task_container {
@@ -24,7 +24,6 @@
   flex-direction: column;
   align-items: center;
   width: 359px;
-  height: 100%;
   background-color: #242424;
   border-radius: 10px 10px 0 0;
   margin-top: 48px;
