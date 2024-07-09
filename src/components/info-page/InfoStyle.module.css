@@ -1,6 +1,6 @@
 .page_container {
   position: fixed;
-  height: 725px;
+  height: 100%;
   overflow: scroll;
   width: 375px;
 }
@@ -10,7 +10,6 @@
   flex-direction: column;
   background-color: #141414;
   color: white;
-  margin-bottom: 40px;
 }
 
 .task_container {
