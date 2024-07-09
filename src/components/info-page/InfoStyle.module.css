@@ -1,6 +1,6 @@
 .page_container {
   padding: 8px;
-  position: fixed;
+  /* position: fixed; */
   height: 100%;
   overflow: scroll;
 }

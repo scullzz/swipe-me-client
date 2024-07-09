@@ -52,7 +52,7 @@ const Navigation = () => {
   };
 
   return (
-    <div>
+    <div className={style.MainContainer}>
       <div className={style.OutletContainer}>
         <Outlet />
       </div>
