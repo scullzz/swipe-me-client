@@ -1,7 +1,5 @@
 .task_container {
     width: 359px;
-    /* height: 60px; */
-    /* display: flex; */
     flex-direction: row;
     align-items: center;
     overflow: hidden;
@@ -9,14 +7,20 @@
     margin-bottom: 3px;
 }
 
-.task {
+.task_btn {
     gap: 3px;
     padding: 11px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
     width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: white;
 }
 
 .task_main_info {
@@ -59,18 +63,6 @@
     font-weight: 400;
     text-align: center;
     white-space: pre-line;
-}
-
-.arrow_btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    width: 6.5px;
-    height: 13px;
 }
 
 .task_description {
