@@ -13,7 +13,7 @@ const Task = () => {
 
   return (
     <div className={style.task_container}>
-      <div className={style.task} onClick={handleToggle}>
+      <button className={style.task_btn} onClick={handleToggle}>
         <div className={style.task_main_info}>
           <img src={done_task} alt="done_task" className={style.task_icon_status} />
           <div className={style.title_date_wrapper}>
@@ -28,7 +28,7 @@ const Task = () => {
           </div>
           <img src={isOpen ? open_arrow : closed_arrow} alt="toggle_arrow" />
         </div>
-      </div>
+      </button>
       {isOpen && (
         <div className={style.task_description}>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem alias unde asperiores, dolores pariatur velit magni natus. Cumque labore consequatur architecto inventore cupiditate amet porro? Minima eveniet facilis soluta! Nemo.</p>

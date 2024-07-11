@@ -15,3 +15,8 @@
 ::-webkit-scrollbar:horizontal {
   display: none;
 }
+
+body{
+  background-color: #141414;
+  color: white;
+}
