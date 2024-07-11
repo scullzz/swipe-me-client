@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+import Avatar from "@mui/material/Avatar";
+import style from "./style.module.css";
 const AboutMe = () => {
   const [userData, setUserData] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
+  const [firstLetter, setFirstLetter] = useState(null);
   const tg = window.Telegram.WebApp;
 
   const getUserData = () => {
@@ -10,6 +12,9 @@ const AboutMe = () => {
     setUserData(data);
     if (data.id) {
       fetchUserProfilePhoto(data.id);
+    }
+    if (data.first_name) {
+      setFirstLetter(data.first_name.charAt(0));
     }
   };
 
@@ -40,6 +45,37 @@ const AboutMe = () => {
 
   return (
     <div>
+      <div>
+        <div>
+          {userPhoto ? (
+            <Avatar src={userPhoto} />
+          ) : (
+            <Avatar>{firstLetter}</Avatar>
+          )}
+          <span>{userData?.first_name}</span>
+          <span>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
+            impedit?
+          </span>
+        </div>
+        <div>
+          <div>
+            <span>666</span>
+            <span>Views</span>
+          </div>
+          <div>
+            <span>666</span>
+            <span>Subscribers</span>
+          </div>
+          <div>
+            <span>666</span>
+            <span>Likes</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        
+      </div>
       <h1>Main</h1>
       {userData ? (
         <div>
@@ -60,7 +96,6 @@ const AboutMe = () => {
       ) : (
         <p>Загрузка данных пользователя...</p>
       )}
-
     </div>
   );
 };
