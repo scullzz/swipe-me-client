@@ -10,6 +10,7 @@ import qr from "./image/qrcode.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import "./style.css";
 
 const AboutMe = () => {
   const settings = {
@@ -58,8 +59,10 @@ const AboutMe = () => {
       console.error("Error fetching user profile photo:", error);
     }
   };
+  let res;
 
   useEffect(() => {
+    res = JSON.stringify(userData);
     getUserData();
   }, []);
 
@@ -107,10 +110,10 @@ const AboutMe = () => {
       name: "Ещë",
     },
   ];
-    const items = Array.from({ length: 20 }, (_, index) => ({
-      id: index,
-      text: `10, 4k`,
-    }));
+  const items = Array.from({ length: 20 }, (_, index) => ({
+    id: index,
+    text: `10, 4k`,
+  }));
 
   return (
     <div className={style.AboutBlockMain}>
@@ -170,6 +173,7 @@ const AboutMe = () => {
         <div className={style.VideoList}>
           <div className={style.VideoBlock}>
             <span>video</span>
+            <p>{userData}</p>
           </div>
           <div className={style.gridContainer}>
             {items.map((item) => (

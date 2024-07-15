@@ -69,16 +69,16 @@
 }
 
 .SocialBlock {
+     width: 365px;
   margin-top: 32px;
   margin-bottom: 14px;
 }
-
 .SocialImage {
   width: 27px;
   height: 27px;
 }
 .SocialInfoBlock {
-  width: 78.8px;
+  width: 78.88px;
   height: 54px;
   display: flex !important;
   flex-direction: column;
@@ -88,6 +88,7 @@
   background-color: #242424;
   border-radius: 10px;
 }
+
 .SocialInfoText {
   color: #04bfbf;
   font-weight: bold;
