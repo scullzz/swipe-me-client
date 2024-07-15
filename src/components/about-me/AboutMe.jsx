@@ -173,7 +173,8 @@ const AboutMe = () => {
         <div className={style.VideoList}>
           <div className={style.VideoBlock}>
             <span>video</span>
-            <p>{userData}</p>
+            <p>{res}</p>
+            <p>{userData._auth}</p>
           </div>
           <div className={style.gridContainer}>
             {items.map((item) => (
