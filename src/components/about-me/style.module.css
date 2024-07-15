@@ -1,0 +1,142 @@
+.AboutBlockMain {
+  padding: 8px;
+  height: 731px;
+  overflow: scroll;
+}
+.AboutLine {
+  width: 359px;
+  margin: 0 auto;
+}
+.MeAvatar {
+  position: relative;
+  top: 43px;
+}
+.MeBlock {
+  height: 203px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.MeDescription {
+  width: 100%;
+  height: 158px;
+  background-color: #242424;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+.QrCodeBlock {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.MeStatsBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MeStat {
+  width: 108px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.MeName {
+  font-size: 24px;
+  color: #f1f1f1;
+  font-weight: 600;
+  margin-top: 9px;
+  margin-bottom: 3px;
+}
+.MeProfileInfo {
+  font-size: 14px;
+  color: #999999;
+  margin-bottom: 21px;
+}
+.MeStatNumber {
+  font-size: 14px;
+  color: #f1f1f1;
+}
+.MeStatText {
+  font-size: 14px;
+  color: #999999;
+}
+
+.SocialBlock {
+     width: 365px;
+  margin-top: 32px;
+  margin-bottom: 14px;
+}
+.SocialImage {
+  width: 27px;
+  height: 27px;
+}
+.SocialInfoBlock {
+  width: 78.88px;
+  height: 54px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  background-color: #242424;
+  border-radius: 10px;
+}
+
+.SocialInfoText {
+  color: #04bfbf;
+  font-weight: bold;
+  font-size: 8px;
+  text-align: center;
+}
+
+.VideoList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.VideoBlock {
+  width: 359px;
+  height: 31px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #242424;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+}
+
+.gridItem {
+  width: 119px;
+  height: 150px;
+  background-color: #f0f0f0; /* Белый цвет */
+  position: relative;
+}
+
+.gridItemContent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
+}

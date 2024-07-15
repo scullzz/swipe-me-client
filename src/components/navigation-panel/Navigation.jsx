@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 import home from "./image/home.svg";
@@ -14,8 +14,11 @@ import clickedUser from "./image/clickedUser.svg";
 
 const Navigation = () => {
   const nav = useNavigate();
+  useEffect(() => {
+    nav("/home");
+  }, []);
 
-  const [homeClickedIcon, setHomeClickIcon] = useState(false);
+  const [homeClickedIcon, setHomeClickIcon] = useState(true);
   const [codesandboxClickedIcon, setCodesandboxClickedIcon] = useState(false);
   const [mapClickedIcon, setMapClickedIcon] = useState(false);
   const [userClickedIcon, setUserClickedIcon] = useState(false);
