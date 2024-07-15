@@ -26,6 +26,7 @@ const AboutMe = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   const [firstLetter, setFirstLetter] = useState(null);
   const tg = window.Telegram.WebApp;
+  console.log(tg)
 
   const getUserData = () => {
     const data = tg.initDataUnsafe?.user || {};
@@ -59,10 +60,8 @@ const AboutMe = () => {
       console.error("Error fetching user profile photo:", error);
     }
   };
-  let res;
 
   useEffect(() => {
-    res = JSON.stringify(userData);
     getUserData();
   }, []);
 
@@ -173,8 +172,6 @@ const AboutMe = () => {
         <div className={style.VideoList}>
           <div className={style.VideoBlock}>
             <span>video</span>
-            <p>{res}</p>
-            <p>{userData._auth}</p>
           </div>
           <div className={style.gridContainer}>
             {items.map((item) => (
