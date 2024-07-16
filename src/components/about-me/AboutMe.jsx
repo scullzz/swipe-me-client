@@ -119,7 +119,7 @@ const AboutMe = () => {
             <div onClick={() => handleOpen()} className={style.QrCodeBlock}>
               <img src={qr} alt="#" />
             </div>
-            <span className={style.MeName}>{userData.username}</span>
+            <span className={style.MeName}>{userData?.username}</span>
             <span className={style.MeProfileInfo}>
               Short description of the chanel
             </span>
