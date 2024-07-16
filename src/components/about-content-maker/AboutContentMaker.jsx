@@ -12,8 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import "./style.css";
+import exit from "./image/exit.svg"
 
 const AboutMe = () => {
   const settings = {
@@ -74,6 +73,10 @@ const AboutMe = () => {
 
   const list = [
     {
+      image: exit,
+      name: "Отписаться"
+    },
+    {
       image: youtube,
       name: "YouTube",
     },
@@ -84,15 +87,7 @@ const AboutMe = () => {
     {
       image: instagram,
       name: "Instagram",
-    },
-    {
-      image: pencil,
-      name: "Изменить",
-    },
-    {
-      image: dots,
-      name: "Ещë",
-    },
+    }
   ];
   const items = Array.from({ length: 20 }, (_, index) => ({
     id: index,
@@ -119,7 +114,7 @@ const AboutMe = () => {
             <div onClick={() => handleOpen()} className={style.QrCodeBlock}>
               <img src={qr} alt="#" />
             </div>
-            <span className={style.MeName}>{userData.username}</span>
+            <span className={style.MeName}>Scullz</span>
             <span className={style.MeProfileInfo}>
               Short description of the chanel
             </span>
@@ -180,9 +175,7 @@ const AboutMe = () => {
               <img src={qrCode} alt="#" />
             </div>
             <div className={style.LinkBlock}>
-              <p className={style.RefLinkForBot}>
-                t.me/Swipe-Me
-              </p>
+              <p className={style.RefLinkForBot}>t.me/Swipe-Me</p>
             </div>
           </div>
         </Modal>
