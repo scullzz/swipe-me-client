@@ -53,7 +53,7 @@ const Home = () => {
       <div className={style.video_player_wrapper} onClick={handlePlayPause}>
         <video
           ref={videoRef}
-          src={videosSrc[1]}
+          src={videosSrc[4]}
           autoPlay={true}
           loop={true}
           muted={isMuted}
