@@ -52,17 +52,69 @@
   font-weight: 600;
 }
 
-.SecondRewardHeaderblock{
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     flex-direction: column;
+.SecondRewardHeaderblock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.SecondRewardText{
-     margin-top: 12px;
-     font-size: 14px;
+.SecondRewardText {
+  margin-top: 12px;
+  font-size: 14px;
 }
-.SecondRewardText1{
-     font-size: 14px;
+.SecondRewardText1 {
+  font-size: 14px;
+}
+
+.secondRewardBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  bottom: 103px;
+  gap: 5px;
+}
+
+.SecondRewardBlockCompeteBlock {
+  width: 359px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #242424;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.SecondRewardBlockCompeteBlockText {
+  font-size: 18px;
+}
+
+.ChallandgeBlock {
+  width: 359px;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px;
+  background-color: #242424;
+}
+
+.ChallangeText {
+  font-size: 16px;
+}
+.ChallangeButton {
+  font-size: 13px;
+  width: 115px;
+  height: 29px;
+  border-radius: 7px;
+  font-weight: 600;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #04bfbf;
+  border: none;
 }
