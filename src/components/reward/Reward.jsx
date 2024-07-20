@@ -14,10 +14,14 @@ const Reward = () => {
           <div className={style.RewardDescriptionBlock}>
             <div className={style.FirstRewardHeader}>
               <img src={dollarfly} alt="#" />
-              <span className={style.FirstRewardHeaderText}>Розыгрыш 5.000.000 токенов</span>
+              <span className={style.FirstRewardHeaderText}>
+                Розыгрыш 5.000.000 токенов
+              </span>
             </div>
             <div className={style.SecondRewardHeaderblock}>
-              <p className={style.SecondRewardText}>Розыгрыш в честь запуска нашего нового проекта.</p>
+              <p className={style.SecondRewardText}>
+                Розыгрыш в честь запуска нашего нового проекта.
+              </p>
               <p className={style.SecondRewardText1}>
                 <b>Swipe Me</b> - это не просто платформа для просмотра смешных
                 видео, это революционный инструмент для блогеров и пользователей
@@ -27,16 +31,18 @@ const Reward = () => {
           </div>
         </div>
         <div className={style.secondRewardBlock}>
-          <div>
-            <span>Для участия:</span>
+          <div className={style.SecondRewardBlockCompeteBlock}>
+            <span className={style.SecondRewardBlockCompeteBlockText}>
+              Для участия:
+            </span>
           </div>
-          <div>
-            <span>Подпишись на наш канал</span>
-            <button>подписаться</button>
+          <div className={style.ChallandgeBlock}>
+            <span className={style.ChallangeText}>Подпишись на наш канал</span>
+            <button className={style.ChallangeButton}>подписаться</button>
           </div>
-          <div>
-            <span>Пригласи 5 друзей</span>
-            <button>пригласить 0/5</button>
+          <div className={style.ChallandgeBlock}>
+            <span className={style.ChallangeText}>Пригласи 5 друзей</span>
+            <button className={style.ChallangeButton}>пригласить 0/5</button>
           </div>
         </div>
         <div className={style.thirdRewardBlock}>
