@@ -16,7 +16,10 @@ const Navigation = () => {
   const nav = useNavigate();
   useEffect(() => {
     nav("/home");
+
+
   }, []);
+
 
   const [homeClickedIcon, setHomeClickIcon] = useState(true);
   const [codesandboxClickedIcon, setCodesandboxClickedIcon] = useState(false);
