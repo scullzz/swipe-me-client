@@ -118,3 +118,14 @@
   background-color: #04bfbf;
   border: none;
 }
+.ChallandgeButtonFinish{
+  width: 115px;
+  height: 29px;
+  border-radius: 7px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F3C12C;
+  border: none;
+}

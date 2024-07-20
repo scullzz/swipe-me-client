@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import prize from "./image/prize.svg";
 import dollarfly from "./image/dollarfly.svg";
+import finish from "./image/finish.svg";
 
 const Reward = () => {
+  const [isSub, setIsSub] = useState(true);
+  const [isLinkFollow, setLinkFollow] = useState(0);
+
   return (
     <div className={style.RewardMainBlock}>
       <div className={style.RewardLineBlock}>
@@ -38,7 +42,13 @@ const Reward = () => {
           </div>
           <div className={style.ChallandgeBlock}>
             <span className={style.ChallangeText}>Подпишись на наш канал</span>
-            <button className={style.ChallangeButton}>подписаться</button>
+            {isSub === false ? (
+              <button className={style.ChallangeButton}>подписаться</button>
+            ) : (
+              <button className={style.ChallandgeButtonFinish}>
+                <img src={finish} alt="#" />
+              </button>
+            )}
           </div>
           <div className={style.ChallandgeBlock}>
             <span className={style.ChallangeText}>Пригласи 5 друзей</span>
