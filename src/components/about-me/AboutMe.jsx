@@ -33,11 +33,9 @@ const AboutMe = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   const [firstLetter, setFirstLetter] = useState(null);
   const tg = window.Telegram.WebApp;
-  console.log(tg);
 
   const getUserData = () => {
     const data = tg.initDataUnsafe?.user || {};
-    console.log(data);
     setUserData(data);
     if (data.id) {
       fetchUserProfilePhoto(data.id);
@@ -98,6 +96,33 @@ const AboutMe = () => {
     id: index,
     text: `10, 4k`,
   }));
+
+  //test api
+  const getTestData = async () => {
+    try {
+      const response = await fetch("http://185.250.45.105/accounts/test", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Telegram_User_id: userData?.id,
+        }
+      });
+
+      if (response.status === 200) {
+        alert("Cool");
+      } else if (response.status === 400) {
+        alert("No user");
+      } else if (response.status === 401) {
+        alert("Fuck");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // useEffect(() => {
+  //   getTestData();
+  // }, []);
 
   return (
     <div className={style.AboutBlockMain}>
@@ -180,9 +205,7 @@ const AboutMe = () => {
               <img src={qrCode} alt="#" />
             </div>
             <div className={style.LinkBlock}>
-              <p className={style.RefLinkForBot}>
-                t.me/Swipe-Me
-              </p>
+              <p className={style.RefLinkForBot}>t.me/Swipe-Me</p>
             </div>
           </div>
         </Modal>

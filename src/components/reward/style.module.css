@@ -1,0 +1,68 @@
+.RewardMainBlock {
+  padding: 8px;
+  height: 90vh;
+  overflow: scroll;
+}
+.RewardLineBlock {
+  width: 359px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.FirstRewardBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+}
+.PrizeCircleBackground {
+  background-color: #242424;
+  border-radius: 50%;
+  width: 184px;
+  height: 184px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.PrizeImage {
+  z-index: 2;
+}
+
+.RewardDescriptionBlock {
+  position: relative;
+  height: 225px;
+  background-color: #242424;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  bottom: 108px;
+  padding: 5px;
+}
+
+.FirstRewardHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.FirstRewardHeaderText {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.SecondRewardHeaderblock{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+}
+
+.SecondRewardText{
+     margin-top: 12px;
+     font-size: 14px;
+}
+.SecondRewardText1{
+     font-size: 14px;
+}
