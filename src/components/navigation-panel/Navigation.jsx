@@ -99,7 +99,7 @@ const Navigation = () => {
                     : style.Navigation_Text_Clicked
                 }
               >
-                Swapper
+                Swipes
               </span>
             </div>
             <div className={style.Flex_Item}>
