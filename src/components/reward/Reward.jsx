@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import prize from "./image/prize.svg";
 import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
+  const calculateTime = () => {
+    try {
+      const difference = +new Date("2024-07-31T23:59:00") - +new Date();
+      let timeLeft = {};
+
+      if (difference > 0) {
+        timeLeft = {
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        };
+      }
+      return timeLeft;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  let NumberOfRefs = 0;
   const [isSub, setIsSub] = useState(true);
   const [isLinkFollow, setLinkFollow] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(calculateTime());
+  const [finishAll, setFinishAll] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTime());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className={style.RewardMainBlock}>
@@ -52,7 +81,9 @@ const Reward = () => {
           </div>
           <div className={style.ChallandgeBlock}>
             <span className={style.ChallangeText}>Пригласи 5 друзей</span>
-            <button className={style.ChallangeButton}>пригласить 0/5</button>
+            <button className={style.ChallangeButton}>
+              пригласить {NumberOfRefs}/5
+            </button>
           </div>
         </div>
         <div className={style.thirdRewardBlock}>
@@ -61,7 +92,14 @@ const Reward = () => {
             <p>31 июля 2024 в 23:59</p>
           </div>
           <div>
-            <button>Участвовать</button>
+            {finishAll === false ? (
+              <button>Участвовать</button>
+            ) : (
+              <button>
+                {timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:
+                {timeLeft.seconds}
+              </button>
+            )}
           </div>
         </div>
       </div>
