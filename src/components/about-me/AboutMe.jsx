@@ -101,12 +101,16 @@ const AboutMe = () => {
   const getTestData = async () => {
     try {
       const response = await fetch("http://185.250.45.105/accounts/test", {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-type": "application/json",
-          Telegram_User_id: userData?.id,
-        }
+          "Telegram-User-ID": userData?.id,
+        },
+        body: {
+          auth: userData,
+        },
       });
+      console.log(response);
 
       if (response.status === 200) {
         alert("Cool");
@@ -120,9 +124,9 @@ const AboutMe = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getTestData();
-  // }, []);
+  useEffect(() => {
+    getTestData();
+  }, []);
 
   return (
     <div className={style.AboutBlockMain}>

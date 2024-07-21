@@ -19,7 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     set_sub_video_src(videosSrc.slice(0, 3));
-    set_new_video_src(videosSrc.slice(3, 5));  // исправлено на длину 2
+    set_new_video_src(videosSrc.slice(3, 5));
   }, []);
 
   useEffect(() => {
