@@ -16,6 +16,7 @@ import Box from "@mui/material/Box";
 import "./style.css";
 
 const AboutMe = () => {
+  let res;
   const settings = {
     dots: false,
     infinite: false,
@@ -110,14 +111,13 @@ const AboutMe = () => {
           auth: userData,
         },
       });
-      console.log(response);
 
       if (response.status === 200) {
-        alert("Cool");
+        res = "cool";
       } else if (response.status === 400) {
-        alert("No user");
+        res = "no user";
       } else if (response.status === 401) {
-        alert("Fuck");
+        res = "fuck";
       }
     } catch (err) {
       console.log(err);
@@ -148,7 +148,7 @@ const AboutMe = () => {
             <div onClick={() => handleOpen()} className={style.QrCodeBlock}>
               <img src={qr} alt="#" />
             </div>
-            <span className={style.MeName}>{userData?.username}</span>
+            <span className={style.MeName}>{userData?.username + " " + res}</span>
             <span className={style.MeProfileInfo}>
               Short description of the chanel
             </span>
