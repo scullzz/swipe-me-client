@@ -28,7 +28,7 @@ const Reward = () => {
   const [isSub, setIsSub] = useState(true);
   const [isLinkFollow, setLinkFollow] = useState(0);
   const [timeLeft, setTimeLeft] = useState(calculateTime());
-  const [finishAll, setFinishAll] = useState(true);
+  const [finishAll, setFinishAll] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -88,14 +88,16 @@ const Reward = () => {
         </div>
         <div className={style.thirdRewardBlock}>
           <div>
-            <p>Дата окончания</p>
-            <p>31 июля 2024 в 23:59</p>
+            <p className={style.thirdRewardBlockTitleDate}>Дата окончания</p>
+            <p className={style.thirdRewardBlockTitleTime}>
+              31 июля 2024 в 23:59
+            </p>
           </div>
           <div>
             {finishAll === false ? (
-              <button>Участвовать</button>
+              <button className={style.FalseParticipate}>УЧАСТВОВАТЬ</button>
             ) : (
-              <button>
+              <button className={style.TrueParticipate}>
                 {timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:
                 {timeLeft.seconds}
               </button>
