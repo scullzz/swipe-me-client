@@ -118,7 +118,7 @@
   background-color: #04bfbf;
   border: none;
 }
-.ChallandgeButtonFinish{
+.ChallandgeButtonFinish {
   width: 115px;
   height: 29px;
   border-radius: 7px;
@@ -126,6 +126,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F3C12C;
+  background-color: #f3c12c;
   border: none;
+}
+
+.thirdRewardBlock {
+  position: absolute;
+  bottom: 74px;
+  left: 50%;
+  width: 359px;
+  height: 105px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background-color: #242424;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  gap: 8px;
+}
+
+.thirdRewardBlockTitleDate {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.thirdRewardBlockTitleTime {
+  font-size: 14px;
+}
+
+.FalseParticipate {
+  height: 40px;
+  width: 315px;
+  font-weight: bold;
+  background-color: #028787;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  color: white;
+}
+.TrueParticipate {
+  height: 40px;
+  width: 315px;
+  font-weight: bold;
+  background-color: #F3C12C;
+  border-radius: 10px;
+  border: none;
+  font-size: 19px;
+  color: white;
 }
