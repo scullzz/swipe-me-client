@@ -28,7 +28,7 @@ const Reward = () => {
   const [isSub, setIsSub] = useState(true);
   const [isLinkFollow, setLinkFollow] = useState(0);
   const [timeLeft, setTimeLeft] = useState(calculateTime());
-  const [finishAll, setFinishAll] = useState(false);
+  const [finishAll, setFinishAll] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => {
