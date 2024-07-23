@@ -15,13 +15,11 @@ import clickedUser from "./image/clickedUser.svg";
 const Navigation = () => {
   const nav = useNavigate();
   useEffect(() => {
-    nav("/home");
-
-
+    nav("/swapper");
   }, []);
 
 
-  const [homeClickedIcon, setHomeClickIcon] = useState(true);
+  const [homeClickedIcon, setHomeClickIcon] = useState(false);
   const [codesandboxClickedIcon, setCodesandboxClickedIcon] = useState(false);
   const [mapClickedIcon, setMapClickedIcon] = useState(false);
   const [userClickedIcon, setUserClickedIcon] = useState(false);
@@ -53,7 +51,7 @@ const Navigation = () => {
         break;
       default:
         setHomeClickIcon(true);
-        nav("/home");
+        nav("/swapper");
     }
   };
 
