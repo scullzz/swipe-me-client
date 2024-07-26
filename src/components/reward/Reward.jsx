@@ -5,6 +5,26 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
+  const [visible, setVisible] = useState(false);
+  const [finalVisible, setFinalVisible] = useState(false);
+  const [isSub, setIsSub] = useState(true);
+  const [linkFollow, setLinkFollow] = useState(3);
+  const [finishAll, setFinishAll] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    const tg = window.Telegram.WebApp;
+
+    const data = tg.initDataUnsafe?.user || {};
+    setUserData(data);
+    getIsSubscribed();
+
+    if (isSub === true && linkFollow >= 5) {
+      setFinishAll(true);
+    }
+  }, []);
+
   const calculateTime = () => {
     try {
       const difference = +new Date("2024-07-31T23:59:00") - +new Date();
@@ -23,12 +43,32 @@ const Reward = () => {
       console.log(err);
     }
   };
-
-  let NumberOfRefs = 0;
-  const [isSub, setIsSub] = useState(true);
-  const [isLinkFollow, setLinkFollow] = useState(0);
   const [timeLeft, setTimeLeft] = useState(calculateTime());
-  const [finishAll, setFinishAll] = useState(true);
+
+  const getIsSubscribed = async () => {
+    try {
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/preregistered/me/",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Telegram-User-ID": userData?.id || 100,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (data.subscribed) {
+        setIsSub(data?.subscribed);
+      }
+      if (data.invited) {
+        setLinkFollow(data.invited);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,8 +77,52 @@ const Reward = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const saveToBuffer = () => {
+    const link = `https://t.me/@SwipeeMeBot?start=<${userData?.id}>`;
+    setVisible(true);
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, 3000);
+
+    navigator.clipboard.writeText(link);
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      setFinalVisible(false);
+    }, 3000);
+  }, [finalVisible]);
+
+  const OpenTimerAndReward = async () => {
+    try {
+      setIsOpen(true);
+      setFinalVisible(true);
+
+      await fetch(
+        "https://swipeapi.paradigmacompany.com/preregistered/rewarded/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Telegram-User-ID": userData?.id || 100,
+          },
+          body: {
+            rewarded: true,
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={style.RewardMainBlock}>
+      {visible === true ? (
+        <div className={style.notification}>ссылка скопированна</div>
+      ) : null}
+      {finalVisible === true ? (
+        <div className={style.notificationFinal}>успешно зарегистрирован</div>
+      ) : null}
       <div className={style.RewardLineBlock}>
         <div className={style.FirstRewardBlock}>
           <div className={style.PrizeCircleBackground}>
@@ -72,7 +156,14 @@ const Reward = () => {
           <div className={style.ChallandgeBlock}>
             <span className={style.ChallangeText}>Подпишись на наш канал</span>
             {isSub === false ? (
-              <button className={style.ChallangeButton}>подписаться</button>
+              <button
+                onClick={() =>
+                  (window.location.href = "https://t.me/SwipeMeNews")
+                }
+                className={style.ChallangeButton}
+              >
+                подписаться
+              </button>
             ) : (
               <button className={style.ChallandgeButtonFinish}>
                 <img src={finish} alt="#" />
@@ -81,9 +172,18 @@ const Reward = () => {
           </div>
           <div className={style.ChallandgeBlock}>
             <span className={style.ChallangeText}>Пригласи 5 друзей</span>
-            <button className={style.ChallangeButton}>
-              пригласить {NumberOfRefs}/5
-            </button>
+            {linkFollow < 5 ? (
+              <button
+                onClick={() => saveToBuffer()}
+                className={style.ChallangeButton}
+              >
+                пригласить {linkFollow}/5
+              </button>
+            ) : (
+              <button className={style.ChallandgeButtonFinish}>
+                <img src={finish} alt="#" />
+              </button>
+            )}
           </div>
         </div>
         <div className={style.thirdRewardBlock}>
@@ -94,8 +194,21 @@ const Reward = () => {
             </p>
           </div>
           <div>
-            {finishAll === false ? (
-              <button className={style.FalseParticipate}>УЧАСТВОВАТЬ</button>
+            {isOpen === false ? (
+              finishAll === false ? (
+                <button className={style.TrueFalseParticipate}>
+                  УЧАСТВОВАТЬ
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    OpenTimerAndReward();
+                  }}
+                  className={style.FalseParticipate}
+                >
+                  УЧАСТВОВАТЬ
+                </button>
+              )
             ) : (
               <button className={style.TrueParticipate}>
                 {timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:
