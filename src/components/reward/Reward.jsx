@@ -53,7 +53,7 @@ const Reward = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": userData?.id,
+            "Telegram-User-ID": `${userData?.id}`,
           },
         }
       );
@@ -106,7 +106,7 @@ const Reward = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": userData?.id,
+            "Telegram-User-ID": `${userData?.id}`,
           },
           body: {
             rewarded: true,
@@ -118,6 +118,7 @@ const Reward = () => {
     }
   };
 
+  
   return (
     <div className={style.RewardMainBlock}>
       {visible === true ? (
