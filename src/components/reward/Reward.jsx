@@ -8,7 +8,7 @@ const Reward = () => {
   const [visible, setVisible] = useState(false);
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(true);
-  const [linkFollow, setLinkFollow] = useState(3);
+  const [linkFollow, setLinkFollow] = useState(0);
   const [finishAll, setFinishAll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState({});
