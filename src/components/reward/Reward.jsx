@@ -5,6 +5,8 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
+  const tg = window.Telegram.WebApp;
+
   const [visible, setVisible] = useState(false);
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(false);
@@ -14,8 +16,6 @@ const Reward = () => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const tg = window.Telegram.WebApp;
-
     const data = tg.initDataUnsafe?.user || {};
     setUserData(data);
     getIsSubscribed();
@@ -53,17 +53,20 @@ const Reward = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": userData?.id || 100,
+            "Telegram-User-ID": userData?.id,
           },
         }
       );
+      if (response.status === 200) {
+        alert("cool");
+      }
 
       const data = await response.json();
-      if (data.subscribed) {
+      if (data?.subscribed) {
         setIsSub(data?.subscribed);
       }
-      if (data.invited) {
-        setLinkFollow(data.invited);
+      if (data?.invited) {
+        setLinkFollow(data?.invited);
       }
     } catch (err) {
       console.log(err);
@@ -103,7 +106,7 @@ const Reward = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": userData?.id || 100,
+            "Telegram-User-ID": userData?.id,
           },
           body: {
             rewarded: true,
