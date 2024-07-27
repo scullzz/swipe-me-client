@@ -58,9 +58,14 @@ const Reward = () => {
         }
       );
 
-      const data = await response.json();
-      setIsSub(data?.subscribed);
-      setLinkFollow(data?.invited);
+      if (response.ok) {
+        alert("cool");
+        const data = await response.json();
+        setIsSub(data?.subscribed);
+        setLinkFollow(data?.invited);
+      } else {
+        alert("fuck");
+      }
     } catch (err) {
       console.log(err);
     }
