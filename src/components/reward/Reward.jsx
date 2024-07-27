@@ -18,12 +18,19 @@ const Reward = () => {
     const data = tg.initDataUnsafe?.user;
 
     setUserData(data);
-    getIsSubscribed();
+  }, []);
 
+  useEffect(() => {
+    if (userData.id) {
+      getIsSubscribed();
+    }
+  }, [userData]);
+
+  useEffect(() => {
     if (isSub === true && linkFollow >= 5) {
       setFinishAll(true);
     }
-  }, []);
+  }, [isSub, linkFollow]);
 
   const calculateTime = () => {
     try {
