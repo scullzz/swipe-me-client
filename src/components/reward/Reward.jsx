@@ -46,6 +46,7 @@ const Reward = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTime());
 
   const getIsSubscribed = async () => {
+    alert(userData?.id);
     try {
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/me/",
