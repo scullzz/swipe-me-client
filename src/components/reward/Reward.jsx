@@ -53,7 +53,6 @@ const Reward = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTime());
 
   const getIsSubscribed = async () => {
-    alert(userData?.id);
     try {
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/me/",
@@ -66,14 +65,9 @@ const Reward = () => {
         }
       );
 
-      if (response.ok) {
-        alert("cool");
-        const data = await response.json();
-        setIsSub(data?.subscribed);
-        setLinkFollow(data?.invited);
-      } else {
-        alert("fuck");
-      }
+      const data = await response.json();
+      setIsSub(data?.subscribed);
+      setLinkFollow(data?.invited);
     } catch (err) {
       console.log(err);
     }
