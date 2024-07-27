@@ -126,7 +126,6 @@ const Reward = () => {
       {finalVisible === true ? (
         <div className={style.notificationFinal}>успешно зарегистрирован</div>
       ) : null}
-      <p>{userData?.id}</p>
       <div className={style.RewardLineBlock}>
         <div className={style.FirstRewardBlock}>
           <div className={style.PrizeCircleBackground}>
