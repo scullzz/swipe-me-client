@@ -74,7 +74,7 @@ const Reward = () => {
   }, []);
 
   const saveToBuffer = () => {
-    const link = `https://t.me/@SwipeeMeBot?start=${userData?.id}`;
+    const link = `https://t.me/SwipeeMeBot?start=${userData?.id}`;
     setVisible(true);
     const timer = setTimeout(() => {
       setVisible(false);
