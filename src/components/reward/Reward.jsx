@@ -16,7 +16,6 @@ const Reward = () => {
 
   useEffect(() => {
     const data = tg.initDataUnsafe?.user;
-
     setUserData(data);
   }, []);
 
@@ -60,7 +59,7 @@ const Reward = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": userData?.id,
+            "Telegram-User-ID": 714092858,
           },
         }
       );
@@ -92,7 +91,6 @@ const Reward = () => {
 
   const CheckSubStatus = async () => {
     try {
-      alert(userData?.id)
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/subscribed/",
         {
@@ -121,7 +119,7 @@ const Reward = () => {
       setIsOpen(true);
       setFinalVisible(true);
 
-      await fetch(
+      const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/rewarded/",
         {
           method: "POST",
@@ -129,9 +127,9 @@ const Reward = () => {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
           },
-          body: {
-            rewarded: true,
-          },
+          body: JSON.stringify({
+            rewarded: 1,
+          }),
         }
       );
     } catch (err) {
