@@ -5,23 +5,23 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
-  const [visible, setVisible] = useState(false);
+  const tg = window.Telegram.WebApp;
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(false);
   const [linkFollow, setLinkFollow] = useState(0);
   const [finishAll, setFinishAll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isChangeText, setIsChangeText] = useState(false);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const tg = window.Telegram.WebApp;
     const data = tg.initDataUnsafe?.user;
 
     setUserData(data);
   }, []);
 
   useEffect(() => {
-    if (userData.id) {
+    if (userData?.id) {
       getIsSubscribed();
     }
   }, [userData]);
@@ -82,18 +82,38 @@ const Reward = () => {
 
   const saveToBuffer = () => {
     const link = `https://t.me/SwipeeMeBot?start=${userData?.id}`;
-    setVisible(true);
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, 3000);
-
-    navigator.clipboard.writeText(link);
+    tg.openTelegramLink(`https://t.me/share/url?url=${link}&text=Салам брат`);
   };
   useEffect(() => {
     setTimeout(() => {
       setFinalVisible(false);
     }, 3000);
   }, [finalVisible]);
+
+  const CheckSubStatus = async () => {
+    try {
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/preregistered/subscribed/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Telegram-User-ID": userData?.id,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (data?.subscribed === false) {
+        window.location.href = "https://t.me/SwipeMeNews";
+        setIsChangeText(true);
+      } else {
+        setIsSub(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const OpenTimerAndReward = async () => {
     try {
@@ -120,9 +140,6 @@ const Reward = () => {
 
   return (
     <div className={style.RewardMainBlock}>
-      {visible === true ? (
-        <div className={style.notification}>ссылка скопированна</div>
-      ) : null}
       {finalVisible === true ? (
         <div className={style.notificationFinal}>успешно зарегистрирован</div>
       ) : null}
@@ -160,12 +177,10 @@ const Reward = () => {
             <span className={style.ChallangeText}>Подпишись на наш канал</span>
             {isSub === false ? (
               <button
-                onClick={() =>
-                  (window.location.href = "https://t.me/SwipeMeNews")
-                }
+                onClick={() => CheckSubStatus()}
                 className={style.ChallangeButton}
               >
-                подписаться
+                {isChangeText === false ? "подписаться" : "проверить"}
               </button>
             ) : (
               <button className={style.ChallandgeButtonFinish}>
