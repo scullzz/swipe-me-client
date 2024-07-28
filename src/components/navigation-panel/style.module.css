@@ -1,4 +1,4 @@
-.MainContainer{
+.MainContainer {
   display: flex;
   width: 100vw;
   height: 100%;
@@ -38,6 +38,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  pointer-events: none;
 }
 .Navigation_Text {
   color: white;
