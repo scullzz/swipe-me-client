@@ -58,19 +58,20 @@ const Home = () => {
 
   return (
     <div className={style.home_container}>
-      <div className={style.video_player_wrapper} onClick={handlePlayPause}>
+      <div className={style.video_player_wrapper} /* onClick={handlePlayPause} */>
         <video
           ref={videoRef}
-          src={videosSrc[1]}
+          src={videosSrc[2]}
           autoPlay={true}
           loop={true}
           muted={isMuted}
           controls={false}
           className={style.video_player}
+          onClick={handlePlayPause}
         />
         <div className={style.overlay_top}>
           <button className={style.mute_btn} onClick={handleMute}>
-            <img src={isMuted ? muted_sound_icon : unmuted_sound_icon} alt="mute_icon" />
+            <img src={isMuted ? muted_sound_icon : unmuted_sound_icon} alt="mute_icon" className={style.btn_action_icon} />
           </button>
           <div className={style.overlay_top_content}>
             <div className={style.overlay_top_content_selection}>
@@ -83,7 +84,7 @@ const Home = () => {
           <div className={style.overlay_right_content}>
             <div className={style.overlay_right_content_part}>
               <button className={style.overlay_right_content_button}>
-                <img src={avatar} alt="avatar" />
+                <img src={avatar} alt="avatar" className={style.right_avatar} />
               </button>
               <button className={style.overlay_right_avatar_sub_btn}>
                 <img src={plus_icon} alt="plus_icon" />
@@ -92,21 +93,21 @@ const Home = () => {
             <div className={style.right_btns_wrapper}>
               <div className={style.overlay_right_content_part}>
                 <button className={style.overlay_right_content_button}>
-                  <img src={heart} alt="heart" />
+                  <img src={heart} alt="heart" className={style.btn_action_icon} />
                 </button>
-                <p>11.2M</p>
+                <p className={style.overlay_right_content_part_text}>11.2M</p>
               </div>
               <div className={style.overlay_right_content_part}>
                 <button className={style.overlay_right_content_button}>
-                  <img src={comments} alt="comments" />
+                  <img src={comments} alt="comments" className={style.btn_action_icon} />
                 </button>
-                <p>11.2M</p>
+                <p className={style.overlay_right_content_part_text}>11.2M</p>
               </div>
               <div className={style.overlay_right_content_part}>
                 <button className={style.overlay_right_content_button}>
-                  <img src={share} alt="share" />
+                  <img src={share} alt="share" className={style.btn_action_icon} />
                 </button>
-                <p>11.2M</p>
+                <p className={style.overlay_right_content_part_text}>11.2M</p>
               </div>
             </div>
           </div>

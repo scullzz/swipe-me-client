@@ -1,3 +1,4 @@
+/* global style for buttons only in this component  */
 button {
     all: unset;
     display: inline-block;
@@ -5,6 +6,7 @@ button {
     cursor: pointer;
 }
 
+/* main component container  */
 .home_container {
     display: flex;
     margin: 0 auto;
@@ -14,6 +16,7 @@ button {
     position: relative;
 }
 
+/* video player container */
 .video_player_wrapper {
     display: flex;
     align-items: center;
@@ -32,6 +35,7 @@ button {
     z-index: 1;
 }
 
+/* video overlay top part */
 .overlay_top {
     z-index: 2;
     position: absolute;
@@ -59,11 +63,13 @@ button {
     top: 50%;
     transform: translateY(-40%);
 }
-.mute_btn img {
-    width: 24px;
-    height: 24px;
+
+.btn_action_icon {
+    width: 27px;
+    height: 27px;
 }
 
+/* video overlay right part */
 .overlay_right {
     z-index: 2;
     position: absolute;
@@ -83,6 +89,10 @@ button {
     gap: 16px;
 }
 
+.right_avatar{
+    width: 49px;
+    height: 49px;
+}
 .overlay_right_avatar_sub_btn {
     position: relative;
     display: flex;
@@ -92,4 +102,10 @@ button {
     border-radius: 50%;
     width: 15px;
     height: 15px;
+    bottom: 12px;
+    left: 17px;
+}
+.overlay_right_content_part_text{
+    font-size: 14px;
+    font-weight: 400;
 }
