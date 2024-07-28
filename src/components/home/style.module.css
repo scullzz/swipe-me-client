@@ -1,25 +1,26 @@
 button {
     all: unset;
-    display: inline-block; /* или inline-flex, если требуется */
-    box-sizing: border-box; /* Для корректного учета padding и border */
+    display: inline-block;
+    box-sizing: border-box;
     cursor: pointer;
 }
-  
 
 .home_container {
     display: flex;
-    margin: 0 auto;  
+    margin: 0 auto;
     height: calc(100vh - 74px);
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 .video_player_wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .video_player {
@@ -31,69 +32,64 @@ button {
     z-index: 1;
 }
 
-.overlay_top{
-    z-index: 2;
-    position: absolute;
-    top: 1vh;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 13px;
-    font-size: 14px;
-}
-.overlay_top_content_selection{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-.mute_btn{
+.overlay_top {
     z-index: 2;
     position: absolute;
     top: 2.2vh;
-    left: 8vw;
-    transform: translateX(-50%);
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.overlay_right{
+.overlay_top_content {
+    display: flex;
+    flex-direction: row;
+}
+
+.overlay_top_content_selection {
+    display: flex;
+    gap: 10px;
+}
+
+.mute_btn {
+    margin-left: 10px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-40%);
+}
+.mute_btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.overlay_right {
     z-index: 2;
     position: absolute;
-    top: 42vh;
-    right: 3vw;
+    top: 44vh;
+    right: 11px;
 }
-.overlay_right_content{
+
+.overlay_right_content {
     display: flex;
     flex-direction: column;
 }
-.right_btns_wrapper{
+
+.right_btns_wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-    gap: 18px;
+    margin-top: 25px;
+    gap: 16px;
 }
-.overlay_right_avatar_btn {
+
+.overlay_right_avatar_sub_btn {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     background-color: #04BFBF;
     border-radius: 50%;
-    bottom: 1.5vh;
-    left: 1.2vw;
     width: 15px;
     height: 15px;
-    font-size: 10px; /* Подберите оптимальный размер */
-    line-height: 15px; /* Устанавливаем line-height равным высоте кнопки */
-    color: white; /* Если требуется изменить цвет текста */
-}
-
-
-.overlay_bottom{
-    position: absolute;
 }

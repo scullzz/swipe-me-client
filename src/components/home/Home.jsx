@@ -68,23 +68,24 @@ const Home = () => {
           controls={false}
           className={style.video_player}
         />
-      </div>
-      <button className={style.mute_btn}>
-          <img src={unmuted_sound_icon} alt="unmuted_sound_icon" />
-      </button>
-      <div className={style.overlay_top}>
-        <div className={style.overlay_top_content_selection}>
-          <button>Подписки</button>
-          <button>Новинки</button>
+        <div className={style.overlay_top}>
+          <button className={style.mute_btn} onClick={handleMute}>
+            <img src={isMuted ? muted_sound_icon : unmuted_sound_icon} alt="mute_icon" />
+          </button>
+          <div className={style.overlay_top_content}>
+            <div className={style.overlay_top_content_selection}>
+              <button>Подписки</button>
+              <button>Новинки</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className={style.overlay_right}>
+        <div className={style.overlay_right}>
           <div className={style.overlay_right_content}>
             <div className={style.overlay_right_content_part}>
               <button className={style.overlay_right_content_button}>
                 <img src={avatar} alt="avatar" />
               </button>
-              <button className={style.overlay_right_avatar_btn}>
+              <button className={style.overlay_right_avatar_sub_btn}>
                 <img src={plus_icon} alt="plus_icon" />
               </button>
             </div>
@@ -109,6 +110,7 @@ const Home = () => {
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   );
