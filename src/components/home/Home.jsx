@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./style.module.css";
 import muted_sound_icon from "./images/muted_sound.svg";
 import unmuted_sound_icon from "./images/unmuted_sound.svg";
@@ -11,6 +11,7 @@ import plus_icon from "./images/plus.svg";
 const Home = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
+  const [selected, setSelected] = useState('Подписки');
   const videoRef = useRef(null);
 
   const videosSrc = [
@@ -56,9 +57,13 @@ const Home = () => {
     }
   };
 
+  const handleSelection = (content) => {
+    setSelected(content);
+  };
+
   return (
     <div className={style.home_container}>
-      <div className={style.video_player_wrapper} /* onClick={handlePlayPause} */>
+      <div className={style.video_player_wrapper}>
         <video
           ref={videoRef}
           src={videosSrc[2]}
@@ -75,8 +80,18 @@ const Home = () => {
           </button>
           <div className={style.overlay_top_content}>
             <div className={style.overlay_top_content_selection}>
-              <button>Подписки</button>
-              <button>Новинки</button>
+              <button
+                className={`${style.overlay_top_content_selection_button} ${selected === 'Подписки' ? style.selected : ''}`}
+                onClick={() => handleSelection('Подписки')}
+              >
+                Подписки
+              </button>
+              <button
+                className={`${style.overlay_top_content_selection_button} ${selected === 'Новинки' ? style.selected : ''}`}
+                onClick={() => handleSelection('Новинки')}
+              >
+                Новинки
+              </button>
             </div>
           </div>
         </div>
@@ -121,7 +136,7 @@ const Home = () => {
               <p className={style.overlay_description}>Описание валополпролвапроларпрп</p>
               <ul className={style.overlay_tags}>
                 <li><a href="">#хештег1</a></li>
-                <li><a href="">#хештег2</a></li> 
+                <li><a href="">#хештег2</a></li>
               </ul>
             </div>
           </div>
