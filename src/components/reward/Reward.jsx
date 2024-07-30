@@ -42,8 +42,14 @@ const Reward = () => {
   //   }
   // };
   useEffect(() => {
-    window.Telegram.WebApp.ready(function () {
-      window.Telegram.WebApp.expand();
+    tg.expand();
+    tg.MainButton.hide();
+    tg.disableClosingConfirmation();
+
+    tg.onEvent("viewportChanged", (height) => {
+      if (height < window.innerHeight) {
+        tg.expand();
+      }
     });
 
     const data = tg.initDataUnsafe?.user;
