@@ -12,10 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
     <Routes>
         <Route path="/" element={<Navigation />}>
-        {/* <Route path="home" element={<Home />} />
-        <Route path="info" element={<InfoPage />}></Route>
-        <Route path="about-me" element={<AboutMe/>} /> */}
-        <Route path="swapper" element={<Reward/>}></Route>
+        <Route path="home" element={<Home />} />
       </Route>
     </Routes>
   </Router>
