@@ -14,19 +14,19 @@ const Reward = () => {
   const [isChangeText, setIsChangeText] = useState(false);
   const [userData, setUserData] = useState({});
 
-  const checkAuth = async () => {
+  const checkAuth = async (data) => {
     try {
-      alert(userData?.id)
+      alert(data?.id)
       const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/accounts/test",
+        "https://swipeapi.paradigmacompany.com/accounts/test/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": userData?.id,
+            "Telegram-User-ID": data?.id,
           },
           body: JSON.stringify({
-            auth: userData,
+            auth: data,
           }),
         }
       );
@@ -43,7 +43,7 @@ const Reward = () => {
   useEffect(() => {
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
-    checkAuth();
+    checkAuth(data);
   }, []);
 
   useEffect(() => {
