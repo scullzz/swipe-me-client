@@ -43,6 +43,16 @@ const Reward = () => {
   // };
   useEffect(() => {
     tg.expand();
+    tg.MainButton.hide();
+    tg.disableClosingConfirmation();
+    tg.showPopup({
+      buttons: [],
+    });
+    tg.onEvent("viewportChanged", (height) => {
+      if (height < window.innerHeight) {
+        tg.expand();
+      }
+    });
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
     // checkAuth(data);
