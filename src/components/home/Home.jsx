@@ -83,9 +83,11 @@ const Home = () => {
         <div className={style.overlay_right}>
           <div className={style.overlay_right_content}>
             <div className={style.overlay_right_content_part}>
-              <button className={style.overlay_right_content_button}>
-                <img src={avatar} alt="avatar" className={style.right_avatar} />
-              </button>
+              <a href="">
+                <button className={style.overlay_right_content_button}>
+                  <img src={avatar} alt="avatar" className={style.right_avatar} />
+                </button>
+              </a>
               <button className={style.overlay_right_avatar_sub_btn}>
                 <img src={plus_icon} alt="plus_icon" />
               </button>
@@ -109,6 +111,18 @@ const Home = () => {
                 </button>
                 <p className={style.overlay_right_content_part_text}>11.2M</p>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className={style.overlay_bottom}>
+          <div className={style.overlay_bottom_content}>
+            <h3 className={style.overlay_video_title}>ХАЙП</h3>
+            <div className={style.overlay_description_tags}>
+              <p className={style.overlay_description}>Описание валополпролвапроларпрп</p>
+              <ul className={style.overlay_tags}>
+                <li><a href="">#хештег1</a></li>
+                <li><a href="">#хештег2</a></li> 
+              </ul>
             </div>
           </div>
         </div>
