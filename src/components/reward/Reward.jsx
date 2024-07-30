@@ -16,6 +16,7 @@ const Reward = () => {
 
   const checkAuth = async () => {
     try {
+      alert(userData)
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/accounts/test",
         {
