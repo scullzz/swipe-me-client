@@ -30,8 +30,11 @@ const Reward = () => {
         }
       );
 
-      const data = await response.json();
-      console.log(data);
+      if (response.ok) {
+        alert("cool");
+      } else {
+        alert("fuck");
+      }
     } catch (err) {
       console.log(err);
     }
