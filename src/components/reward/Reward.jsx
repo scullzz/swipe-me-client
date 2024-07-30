@@ -14,9 +14,35 @@ const Reward = () => {
   const [isChangeText, setIsChangeText] = useState(false);
   const [userData, setUserData] = useState({});
 
+  const checkAuth = async () => {
+    try {
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/accounts/test",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Telegram-User-ID": userData?.id,
+          },
+          body: JSON.stringify({
+            auth: userData,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        alert("cool");
+      } else {
+        alert("fuck");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
+    checkAuth();
   }, []);
 
   useEffect(() => {
@@ -59,7 +85,7 @@ const Reward = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": 714092858,
+            "Telegram-User-ID": userData?.id,
           },
         }
       );
