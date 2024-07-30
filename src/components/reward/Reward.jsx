@@ -42,14 +42,10 @@ const Reward = () => {
   //   }
   // };
   useEffect(() => {
-    tg.expand();
-    tg.MainButton.hide();
-    tg.disableClosingConfirmation();
-    tg.onEvent("viewportChanged", (height) => {
-      if (height < window.innerHeight) {
-        tg.expand();
-      }
+    Telegram.WebApp.ready(function () {
+      Telegram.WebApp.expand();
     });
+
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
     // checkAuth(data);
