@@ -5,6 +5,7 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
+  const initData = window.Telegram.WebApp.initData;
   const tg = window.Telegram.WebApp;
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(false);
@@ -16,7 +17,7 @@ const Reward = () => {
 
   const checkAuth = async (data) => {
     try {
-      alert(data?.id)
+      alert(data?.id);
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/accounts/test/",
         {
@@ -26,7 +27,7 @@ const Reward = () => {
             "Telegram-User-ID": data?.id,
           },
           body: JSON.stringify({
-            auth: `${data}`,
+            auth: initData,
           }),
         }
       );
