@@ -42,8 +42,8 @@ const Reward = () => {
   //   }
   // };
   useEffect(() => {
-    Telegram.WebApp.ready(function () {
-      Telegram.WebApp.expand();
+    window.Telegram.WebApp.ready(function () {
+      window.Telegram.WebApp.expand();
     });
 
     const data = tg.initDataUnsafe?.user;
