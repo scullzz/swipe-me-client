@@ -26,7 +26,7 @@ const Reward = () => {
             "Telegram-User-ID": data?.id,
           },
           body: JSON.stringify({
-            auth: data,
+            auth: `${data}`,
           }),
         }
       );
