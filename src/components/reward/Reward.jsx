@@ -5,6 +5,7 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
+  const initData = window.Telegram.WebApp.initData;
   const tg = window.Telegram.WebApp;
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(false);
@@ -14,9 +15,46 @@ const Reward = () => {
   const [isChangeText, setIsChangeText] = useState(false);
   const [userData, setUserData] = useState({});
 
+  // const checkAuth = async (data) => {
+  //   try {
+  //     alert(data?.id);
+  //     const response = await fetch(
+  //       "https://swipeapi.paradigmacompany.com/accounts/test/",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "Telegram-User-ID": data?.id,
+  //         },
+  //         body: JSON.stringify({
+  //           auth: initData,
+  //         }),
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       alert("cool");
+  //     } else {
+  //       alert("fuck");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   useEffect(() => {
+    tg.expand();
+    tg.MainButton.hide();
+    tg.disableClosingConfirmation();
+
+    tg.onEvent("viewportChanged", (height) => {
+      if (height < window.innerHeight) {
+        tg.expand();
+      }
+    });
+
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
+    // checkAuth(data);
   }, []);
 
   useEffect(() => {
@@ -59,7 +97,7 @@ const Reward = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Telegram-User-ID": 714092858,
+            "Telegram-User-ID": userData?.id,
           },
         }
       );
