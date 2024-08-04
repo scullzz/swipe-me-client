@@ -14,9 +14,9 @@ import clickedUser from "./image/clickedUser.svg";
 
 const Navigation = () => {
   const nav = useNavigate();
-  // useEffect(() => {
-  //   nav("/home");
-  // }, []);
+  useEffect(() => {
+    nav("/home");
+  }, []);
 
 
   const [homeClickedIcon, setHomeClickIcon] = useState(false);

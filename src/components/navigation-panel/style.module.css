@@ -38,7 +38,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  pointer-events: none;
 }
 .Navigation_Text {
   color: white;
