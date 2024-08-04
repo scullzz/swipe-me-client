@@ -89,26 +89,26 @@ const Reward = () => {
   };
   const [timeLeft, setTimeLeft] = useState(calculateTime());
 
-  // const getIsSubscribed = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       "https://swipeapi.paradigmacompany.com/preregistered/me/",
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "Telegram-User-ID": userData?.id,
-  //         },
-  //       }
-  //     );
+  const getIsSubscribed = async () => {
+    try {
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/preregistered/me/",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Telegram-User-ID": userData?.id,
+          },
+        }
+      );
 
-  //     const data = await response.json();
-  //     setIsSub(data?.subscribed);
-  //     setLinkFollow(data?.invited);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+      const data = await response.json();
+      setIsSub(data?.subscribed);
+      setLinkFollow(data?.invited);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
