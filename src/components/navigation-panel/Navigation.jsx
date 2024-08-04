@@ -15,7 +15,7 @@ import clickedUser from "./image/clickedUser.svg";
 const Navigation = () => {
   const nav = useNavigate();
   // useEffect(() => {
-  //   nav("/swapper");
+  //   nav("/home");
   // }, []);
 
 
