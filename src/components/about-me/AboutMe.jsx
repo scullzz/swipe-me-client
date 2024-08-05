@@ -161,7 +161,7 @@ const AboutMe = () => {
               <img src={qr} alt="#" />
             </div>
             <span className={style.MeName}>
-              {userData?.username + " " + res}
+              {userData?.username}
             </span>
             <span className={style.MeProfileInfo}>
               Short description of the chanel

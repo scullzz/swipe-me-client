@@ -42,16 +42,6 @@ const Reward = () => {
   //   }
   // };
   useEffect(() => {
-    tg.expand();
-    tg.MainButton.hide();
-    tg.disableClosingConfirmation();
-
-    tg.onEvent("viewportChanged", (height) => {
-      if (height < window.innerHeight) {
-        tg.expand();
-      }
-    });
-
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
     // checkAuth(data);

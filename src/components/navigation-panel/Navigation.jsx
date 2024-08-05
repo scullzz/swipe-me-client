@@ -18,7 +18,7 @@ const Navigation = () => {
     nav("/home");
   }, []);
 
-
+  const tg = window.Telegram.WebApp;
   const [homeClickedIcon, setHomeClickIcon] = useState(false);
   const [codesandboxClickedIcon, setCodesandboxClickedIcon] = useState(false);
   const [mapClickedIcon, setMapClickedIcon] = useState(false);
@@ -54,6 +54,18 @@ const Navigation = () => {
         nav("/swapper");
     }
   };
+
+  useEffect(() => {
+    tg.expand();
+    tg.MainButton.hide();
+    tg.disableClosingConfirmation();
+
+    tg.onEvent("viewportChanged", (height) => {
+      if (height < window.innerHeight) {
+        tg.expand();
+      }
+    });
+  }, []);
 
   return (
     <div className={style.MainContainer}>
