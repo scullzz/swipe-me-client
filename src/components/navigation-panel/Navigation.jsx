@@ -14,6 +14,27 @@ import clickedUser from "./image/clickedUser.svg";
 
 const Navigation = () => {
   const nav = useNavigate();
+
+  useEffect(() => {
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.hide();
+    tg.disableClosingConfirmation();
+    tg.web_app_setup_swipe_behavior({
+      allow_vertical_swipe: false,
+    });
+    tg.onEvent("viewportChanged", () => {
+      if (tg.viewportHeight < window.innerHeight) {
+        tg.expand();
+      }
+    });
+    tg.onEvent("viewportChanged", () => {
+      if (tg.viewportStableHeight < window.innerHeight) {
+        tg.expand();
+      }
+    });
+  }, []);
+  
   useEffect(() => {
     nav("/home");
   }, []);
@@ -53,28 +74,6 @@ const Navigation = () => {
         nav("/swapper");
     }
   };
-
-useEffect(() => {
-  const tg = window.Telegram.WebApp;
-  alert("yeah");
-  tg.expand();
-
-  tg.MainButton.hide();
-
-  tg.disableClosingConfirmation();
-
-  tg.onEvent("viewportChanged", () => {
-    if (tg.viewportHeight < window.innerHeight) {
-      tg.expand();
-    }
-  });
-
-  tg.onEvent("viewportChanged", () => {
-    if (tg.viewportStableHeight < window.innerHeight) {
-      tg.expand();
-    }
-  });
-}, []);
 
 
   return (

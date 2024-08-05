@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SwiperCore from 'swiper/core';
+import SwiperCore from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/swiper-bundle.css';
+import "swiper/swiper-bundle.css";
 
 import style from "./style.module.css";
 import muted_sound_icon from "./images/muted_sound.svg";
@@ -17,7 +17,7 @@ SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 const Home = () => {
   const [isMuted, setIsMuted] = useState(false);
-  const [selected, setSelected] = useState('Подписки');
+  const [selected, setSelected] = useState("Подписки");
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
 
@@ -40,7 +40,7 @@ const Home = () => {
 
   const handleMute = () => {
     setIsMuted(!isMuted);
-    document.querySelectorAll("video").forEach(video => {
+    document.querySelectorAll("video").forEach((video) => {
       video.muted = !isMuted;
     });
   };
@@ -50,7 +50,7 @@ const Home = () => {
   };
 
   const handleSlideChange = (swiper) => {
-    if (selected === 'Подписки') {
+    if (selected === "Подписки") {
       setActiveSubIndex(swiper.activeIndex);
     } else {
       setActiveNewIndex(swiper.activeIndex);
@@ -60,7 +60,9 @@ const Home = () => {
   const handleVideoClick = (e) => {
     const video = e.target;
     if (video.paused) {
-      video.play().catch(error => console.error('Video playback failed', error));
+      video
+        .play()
+        .catch((error) => console.error("Video playback failed", error));
     } else {
       video.pause();
     }
@@ -68,11 +70,14 @@ const Home = () => {
 
   useEffect(() => {
     const videos = document.querySelectorAll("video");
-    const activeIndex = selected === 'Подписки' ? activeSubIndex : activeNewIndex;
+    const activeIndex =
+      selected === "Подписки" ? activeSubIndex : activeNewIndex;
     videos.forEach((video, index) => {
       if (index === activeIndex) {
         video.currentTime = 0;
-        video.play().catch(error => console.error('Video playback failed', error));
+        video
+          .play()
+          .catch((error) => console.error("Video playback failed", error));
       } else {
         video.pause();
         video.currentTime = 0;
@@ -87,88 +92,133 @@ const Home = () => {
         mousewheel={true}
         pagination={{ clickable: true }}
         onSlideChange={handleSlideChange}
-        initialSlide={selected === 'Подписки' ? activeSubIndex : activeNewIndex}
+        initialSlide={selected === "Подписки" ? activeSubIndex : activeNewIndex}
         key={selected} // this will force re-render on category change
       >
-        {(selected === 'Подписки' ? sub_video : new_video).map((videoSrc, index) => (
-          <SwiperSlide key={index}>
-            <video
-              src={videoSrc}
-              loop={true}
-              muted={isMuted}
-              controls={false}
-              className={style.video_player}
-              onClick={handleVideoClick}
-              onLoadedData={(e) => {
-                if (index === (selected === 'Подписки' ? activeSubIndex : activeNewIndex)) {
-                  e.target.play().catch(error => console.error('Video playback failed', error));
-                }
-              }}
-            />
-            <div className={style.overlay_right}>
-              <div className={style.overlay_right_content}>
-                <div className={style.overlay_right_content_part}>
-                  <a href="">
-                    <button className={style.overlay_right_content_button}>
-                      <img src={avatar} alt="avatar" className={style.right_avatar} />
-                    </button>
-                  </a>
-                  <button className={style.overlay_right_avatar_sub_btn}>
-                    <img src={plus_icon} alt="plus_icon" />
-                  </button>
-                </div>
-                <div className={style.right_btns_wrapper}>
+        {(selected === "Подписки" ? sub_video : new_video).map(
+          (videoSrc, index) => (
+            <SwiperSlide key={index}>
+              <video
+                src={videoSrc}
+                loop={true}
+                muted={isMuted}
+                controls={false}
+                className={style.video_player}
+                onClick={handleVideoClick}
+                onLoadedData={(e) => {
+                  if (
+                    index ===
+                    (selected === "Подписки" ? activeSubIndex : activeNewIndex)
+                  ) {
+                    e.target
+                      .play()
+                      .catch((error) =>
+                        console.error("Video playback failed", error)
+                      );
+                  }
+                }}
+              />
+              <div className={style.overlay_right}>
+                <div className={style.overlay_right_content}>
                   <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={heart} alt="heart" className={style.btn_action_icon} />
+                    <a href="">
+                      <button className={style.overlay_right_content_button}>
+                        <img
+                          src={avatar}
+                          alt="avatar"
+                          className={style.right_avatar}
+                        />
+                      </button>
+                    </a>
+                    <button className={style.overlay_right_avatar_sub_btn}>
+                      <img src={plus_icon} alt="plus_icon" />
                     </button>
-                    <p className={style.overlay_right_content_part_text}>11.2M</p>
                   </div>
-                  <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={comments} alt="comments" className={style.btn_action_icon} />
-                    </button>
-                    <p className={style.overlay_right_content_part_text}>11.2M</p>
-                  </div>
-                  <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={share} alt="share" className={style.btn_action_icon} />
-                    </button>
-                    <p className={style.overlay_right_content_part_text}>11.2M</p>
+                  <div className={style.right_btns_wrapper}>
+                    <div className={style.overlay_right_content_part}>
+                      <button className={style.overlay_right_content_button}>
+                        <img
+                          src={heart}
+                          alt="heart"
+                          className={style.btn_action_icon}
+                        />
+                      </button>
+                      <p className={style.overlay_right_content_part_text}>
+                        11.2M
+                      </p>
+                    </div>
+                    <div className={style.overlay_right_content_part}>
+                      <button className={style.overlay_right_content_button}>
+                        <img
+                          src={comments}
+                          alt="comments"
+                          className={style.btn_action_icon}
+                        />
+                      </button>
+                      <p className={style.overlay_right_content_part_text}>
+                        11.2M
+                      </p>
+                    </div>
+                    <div className={style.overlay_right_content_part}>
+                      <button className={style.overlay_right_content_button}>
+                        <img
+                          src={share}
+                          alt="share"
+                          className={style.btn_action_icon}
+                        />
+                      </button>
+                      <p className={style.overlay_right_content_part_text}>
+                        11.2M
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={style.overlay_bottom}>
-              <div className={style.overlay_bottom_content}>
-                <h3 className={style.overlay_video_title}>ХАЙП</h3>
-                <div className={style.overlay_description_tags}>
-                  <p className={style.overlay_description}>Описание валополпролвапроларпрп</p>
-                  <ul className={style.overlay_tags}>
-                    <li><a href="">#хештег1</a></li>
-                    <li><a href="">#хештег2</a></li>
-                  </ul>
+              <div className={style.overlay_bottom}>
+                <div className={style.overlay_bottom_content}>
+                  <h3 className={style.overlay_video_title}>ХАЙП</h3>
+                  <div className={style.overlay_description_tags}>
+                    <p className={style.overlay_description}>
+                      Описание валополпролвапроларпрп
+                    </p>
+                    <ul className={style.overlay_tags}>
+                      <li>
+                        <a href="">#хештег1</a>
+                      </li>
+                      <li>
+                        <a href="">#хештег2</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          )
+        )}
       </Swiper>
       <div className={style.overlay_top}>
         <button className={style.mute_btn} onClick={handleMute}>
-          <img src={isMuted ? muted_sound_icon : unmuted_sound_icon} alt="mute_icon" className={style.btn_action_icon} />
+          <img
+            src={isMuted ? muted_sound_icon : unmuted_sound_icon}
+            alt="mute_icon"
+            className={style.btn_action_icon}
+          />
         </button>
         <div className={style.overlay_top_content}>
           <div className={style.overlay_top_content_selection}>
             <button
-              className={`${style.overlay_top_content_selection_button} ${selected === 'Подписки' ? style.selected : ''}`}
-              onClick={() => handleSelection('Подписки')}
+              className={`${style.overlay_top_content_selection_button} ${
+                selected === "Подписки" ? style.selected : ""
+              }`}
+              onClick={() => handleSelection("Подписки")}
             >
               Подписки
             </button>
             <button
-              className={`${style.overlay_top_content_selection_button} ${selected === 'Новинки' ? style.selected : ''}`}
-              onClick={() => handleSelection('Новинки')}
+              className={`${style.overlay_top_content_selection_button} ${
+                selected === "Новинки" ? style.selected : ""
+              }`}
+              onClick={() => handleSelection("Новинки")}
             >
               Новинки
             </button>
