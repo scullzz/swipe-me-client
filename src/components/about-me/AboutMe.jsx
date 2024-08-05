@@ -14,6 +14,7 @@ import Slider from "react-slick";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 const AboutMe = () => {
   let res;
@@ -29,6 +30,7 @@ const AboutMe = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const nav = useNavigate();
 
   const [userData, setUserData] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -75,22 +77,27 @@ const AboutMe = () => {
     {
       image: youtube,
       name: "YouTube",
+      index: 1,
     },
     {
       image: telegram,
       name: "Telegram",
+      index: 2,
     },
     {
       image: instagram,
       name: "Instagram",
+      index: 3,
     },
     {
       image: pencil,
       name: "Изменить",
+      index: 4,
     },
     {
       image: dots,
       name: "Ещë",
+      index: 5,
     },
   ];
   const items = Array.from({ length: 20 }, (_, index) => ({
@@ -128,6 +135,11 @@ const AboutMe = () => {
     getTestData();
   }, []);
 
+  const NavigationSliderBlock = (ind) => {
+    if (ind === 4) {
+      nav("refactor-profile");
+    }
+  };
   return (
     <div className={style.AboutBlockMain}>
       <div className={style.AboutLine}>
@@ -148,7 +160,9 @@ const AboutMe = () => {
             <div onClick={() => handleOpen()} className={style.QrCodeBlock}>
               <img src={qr} alt="#" />
             </div>
-            <span className={style.MeName}>{userData?.username + " " + res}</span>
+            <span className={style.MeName}>
+              {userData?.username + " " + res}
+            </span>
             <span className={style.MeProfileInfo}>
               Short description of the chanel
             </span>
@@ -172,7 +186,11 @@ const AboutMe = () => {
         <div className={style.SocialBlock}>
           <Slider {...settings} className={style.SocialFlexBlock}>
             {list.map((item, index) => (
-              <div className={style.SocialInfoBlock} key={index}>
+              <div
+                className={style.SocialInfoBlock}
+                key={index}
+                onClick={() => NavigationSliderBlock(item.index)}
+              >
                 <img
                   className={style.SocialImage}
                   src={item.image}
