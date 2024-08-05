@@ -17,7 +17,28 @@ const Navigation = () => {
 
   useEffect(() => {
     const tg = window.Telegram.WebApp;
-    tg.expand();
+
+    if (tg) {
+      tg.expand();
+      tg.MainButton.hide();
+      tg.disableClosingConfirmation();
+      if (typeof tg.web_app_setup_swipe_behavior === "function") {
+        tg.web_app_setup_swipe_behavior({
+          allow_vertical_swipe: false,
+        });
+      } else {
+        console.error(
+          "Метод web_app_setup_swipe_behavior не доступен в этой версии SDK"
+        );
+      }
+      tg.onEvent("viewportChanged", () => {
+        if (tg.viewportHeight < window.innerHeight) {
+          tg.expand();
+        }
+      });
+    } else {
+      console.error("Telegram Web App SDK не найден");
+    }
   }, []);
 
   useEffect(() => {
