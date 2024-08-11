@@ -37,9 +37,15 @@ const AboutMe = () => {
   const [authData, setAuthData] = useState({});
   const tg = window.Telegram.WebApp;
 
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   const getUserData = () => {
     const init = window.Telegram.WebApp.initData;
     const data = tg.initDataUnsafe?.user || {};
+    console.log("Fetched initData:", init);
+    console.log("Fetched user data:", data);
     setUserData(data);
     setInitData(init);
     if (data.id) {
@@ -70,10 +76,6 @@ const AboutMe = () => {
       console.error("Error fetching user profile photo:", error);
     }
   };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
 
   const list = [
     {
