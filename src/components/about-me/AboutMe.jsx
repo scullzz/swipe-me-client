@@ -75,21 +75,6 @@ const AboutMe = () => {
 
   const list = [
     {
-      image: youtube,
-      name: "YouTube",
-      index: 1,
-    },
-    {
-      image: telegram,
-      name: "Telegram",
-      index: 2,
-    },
-    {
-      image: instagram,
-      name: "Instagram",
-      index: 3,
-    },
-    {
       image: pencil,
       name: "Изменить",
       index: 4,
@@ -108,7 +93,7 @@ const AboutMe = () => {
   //test api
   const getTestData = async () => {
     try {
-      const response = await fetch("http://185.250.45.105/accounts/test", {
+      const response = await fetch("http://185.250.45.105/accounts/m", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -118,9 +103,10 @@ const AboutMe = () => {
           auth: userData,
         },
       });
+      const data = await response.json();
 
       if (response.status === 200) {
-        res = "cool";
+        alert(data?.telegram_id);
       } else if (response.status === 400) {
         res = "no user";
       } else if (response.status === 401) {
@@ -160,9 +146,7 @@ const AboutMe = () => {
             <div onClick={() => handleOpen()} className={style.QrCodeBlock}>
               <img src={qr} alt="#" />
             </div>
-            <span className={style.MeName}>
-              {userData?.username}
-            </span>
+            <span className={style.MeName}>{userData?.username}</span>
             <span className={style.MeProfileInfo}>
               Short description of the chanel
             </span>
