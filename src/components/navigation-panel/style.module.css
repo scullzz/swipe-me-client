@@ -51,4 +51,6 @@
 .OutletContainer {
   /* width: 100%; */
   max-width: 550px;
+  height: calc(100vh - 74px);
+  margin-bottom: 74px;
 }
