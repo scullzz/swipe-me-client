@@ -94,7 +94,7 @@ const AboutMe = () => {
   //test api
   const getTestData = async () => {
     try {
-      const response = await fetch("http://185.250.45.105/accounts/m", {
+      const response = await fetch("http://185.250.45.105/accounts/s", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
