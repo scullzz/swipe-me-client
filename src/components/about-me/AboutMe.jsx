@@ -100,7 +100,7 @@ const AboutMe = () => {
           method: "GET",
           headers: {
             "Content-type": "application/json",
-            "Telegram-User-ID": "714092858",
+            "Telegram-User-ID": authData?.id,
             Auth: initData,
           },
         }
@@ -132,7 +132,6 @@ const AboutMe = () => {
 
   useEffect(() => {
     getTestData();
-    getSocialLinks();
   }, []);
 
   const NavigationSliderBlock = (ind) => {
@@ -142,7 +141,7 @@ const AboutMe = () => {
   };
   return (
     <div className={style.AboutBlockMain}>
-      <p>{userData?.id}</p>
+      <p>{initData?.id}</p>
       <div className={style.AboutLine}>
         <div className={style.MeBlock}>
           <div className={style.MeAvatar}>
