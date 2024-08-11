@@ -44,24 +44,16 @@ li {
     display: flex;
     margin: 0 auto;
     height: calc(100vh - 74px);
-    width: 100%;
+    max-width: 420px;
     overflow: hidden;
     position: relative;
-}
-
-.video_player_wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 470px;
-    height: 100%;
 }
 
 .video_player {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 470px;
+    width: 100%;
     height: 100%;
 }
 
@@ -74,12 +66,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.swiper-slide video {
-    display: block;
     width: 100%;
-    height: 100%;
 }
 
 .overlay_top {
