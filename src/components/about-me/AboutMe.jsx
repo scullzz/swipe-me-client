@@ -12,12 +12,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 
 const AboutMe = () => {
-  let res;
   const settings = {
     dots: false,
     infinite: false,
@@ -35,6 +33,7 @@ const AboutMe = () => {
   const [userData, setUserData] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
   const [firstLetter, setFirstLetter] = useState(null);
+  const [authData, setAuthData] = useState({});
   const tg = window.Telegram.WebApp;
 
   const getUserData = () => {
@@ -104,14 +103,7 @@ const AboutMe = () => {
         },
       });
       const data = await response.json();
-
-      if (response.status === 200) {
-        alert(data?.telegram_id);
-      } else if (response.status === 400) {
-        res = "no user";
-      } else if (response.status === 401) {
-        res = "fuck";
-      }
+      setAuthData(data);
     } catch (err) {
       console.log(err);
     }
@@ -147,21 +139,25 @@ const AboutMe = () => {
               <img src={qr} alt="#" />
             </div>
             <span className={style.MeName}>{userData?.username}</span>
-            <span className={style.MeProfileInfo}>
-              Short description of the chanel
-            </span>
+            <span className={style.MeProfileInfo}>{authData?.description}</span>
 
             <div className={style.MeStatsBlock}>
               <div className={style.MeStat}>
-                <span className={style.MeStatNumber}>666</span>
+                <span className={style.MeStatNumber}>
+                  {authData?.total_views}
+                </span>
                 <span className={style.MeStatText}>Views</span>
               </div>
               <div className={style.MeStat}>
-                <span className={style.MeStatNumber}>666</span>
+                <span className={style.MeStatNumber}>
+                  {authData?.subscribers}
+                </span>
                 <span className={style.MeStatText}>Subscribers</span>
               </div>
               <div className={style.MeStat}>
-                <span className={style.MeStatNumber}>666</span>
+                <span className={style.MeStatNumber}>
+                  {authData?.total_likes}
+                </span>
                 <span className={style.MeStatText}>Likes</span>
               </div>
             </div>
