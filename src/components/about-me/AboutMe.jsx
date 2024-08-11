@@ -94,14 +94,17 @@ const AboutMe = () => {
   //test api
   const getTestData = async () => {
     try {
-      const response = await fetch("http://185.250.45.105/accounts/s", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          "Telegram-User-ID": userData?.id,
-          Auth: "M1bCSx92W6",
-        },
-      });
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/accounts/s",
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            "Telegram-User-ID": userData?.id,
+            Auth: initData,
+          },
+        }
+      );
       const data = await response.json();
       setAuthData(data);
     } catch (err) {
