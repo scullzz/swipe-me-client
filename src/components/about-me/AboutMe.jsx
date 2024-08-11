@@ -99,7 +99,7 @@ const AboutMe = () => {
         headers: {
           "Content-type": "application/json",
           "Telegram-User-ID": userData?.id,
-          Auth: initData,
+          Auth: "M1bCSx92W6",
         },
       });
       const data = await response.json();
@@ -120,6 +120,7 @@ const AboutMe = () => {
   };
   return (
     <div className={style.AboutBlockMain}>
+      <p>{userData?.id}</p>
       <div className={style.AboutLine}>
         <div className={style.MeBlock}>
           <div className={style.MeAvatar}>
