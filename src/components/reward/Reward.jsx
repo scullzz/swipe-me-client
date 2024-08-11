@@ -5,9 +5,8 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
-    const initData = window.Telegram.WebApp.initData;
-
   const tg = window.Telegram.WebApp;
+  const [initData, setInitData] = useState({});
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(false);
   const [linkFollow, setLinkFollow] = useState(0);
@@ -17,8 +16,10 @@ const Reward = () => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
+    const init = window.Telegram.WebApp.initData;
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
+    setInitData(init);
   }, []);
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const Reward = () => {
           headers: {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
-            "Auth": initData
+            Auth: initData,
           },
         }
       );
@@ -101,7 +102,7 @@ const Reward = () => {
           headers: {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
-            "Auth": initData
+            Auth: initData,
           },
         }
       );
@@ -130,7 +131,7 @@ const Reward = () => {
           headers: {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
-            "Auth": initData
+            Auth: initData,
           },
           body: JSON.stringify({
             rewarded: 1,

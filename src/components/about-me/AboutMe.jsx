@@ -25,8 +25,7 @@ const AboutMe = () => {
     arrows: false,
   };
 
-  const initData = window.Telegram.WebApp.initData;
-
+  const [initData, setInitData] = useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,8 +38,10 @@ const AboutMe = () => {
   const tg = window.Telegram.WebApp;
 
   const getUserData = () => {
+    const init = window.Telegram.WebApp.initData;
     const data = tg.initDataUnsafe?.user || {};
     setUserData(data);
+    setInitData(init);
     if (data.id) {
       fetchUserProfilePhoto(data.id);
     }
@@ -105,6 +106,7 @@ const AboutMe = () => {
           },
         }
       );
+      // "Telegram-User-ID": "714092858",
       const data = await response.json();
       console.log(data);
       setAuthData(data);
@@ -119,8 +121,9 @@ const AboutMe = () => {
         "https://swipeapi.paradigmacompany.com/socialmedia/",
         {
           method: "GET",
-          "Telegram-User-ID": "714092858",
-          Auth: "M1bCSx92W6",
+          headers: {
+            Auth: "M1bCSx92W6",
+          },
         }
       );
       const data = await response.json();
