@@ -105,7 +105,7 @@ const Home = () => {
                 controls={false}
                 className={style.video_player}
                 onClick={handleVideoClick}
-                // playsInline={true}
+                playsInline
                 onLoadedData={(e) => {
                   if (
                     index ===
