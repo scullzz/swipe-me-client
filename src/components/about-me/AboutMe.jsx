@@ -100,13 +100,31 @@ const AboutMe = () => {
           method: "GET",
           headers: {
             "Content-type": "application/json",
-            "Telegram-User-ID": userData?.id,
+            "Telegram-User-ID": "714092858",
             Auth: initData,
           },
         }
       );
       const data = await response.json();
+      console.log(data);
       setAuthData(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getSocialLinks = async () => {
+    try {
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/socialmedia/",
+        {
+          method: "GET",
+          // "Telegram-User-ID": "714092858",
+          Auth: "M1bCSx92W6",
+        }
+      );
+      const data = await response.json();
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -114,6 +132,7 @@ const AboutMe = () => {
 
   useEffect(() => {
     getTestData();
+    getSocialLinks();
   }, []);
 
   const NavigationSliderBlock = (ind) => {

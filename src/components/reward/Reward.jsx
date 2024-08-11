@@ -5,7 +5,8 @@ import dollarfly from "./image/dollarfly.svg";
 import finish from "./image/finish.svg";
 
 const Reward = () => {
-  const initData = window.Telegram.WebApp.initData;
+    const initData = window.Telegram.WebApp.initData;
+
   const tg = window.Telegram.WebApp;
   const [finalVisible, setFinalVisible] = useState(false);
   const [isSub, setIsSub] = useState(false);
@@ -15,36 +16,9 @@ const Reward = () => {
   const [isChangeText, setIsChangeText] = useState(false);
   const [userData, setUserData] = useState({});
 
-  // const checkAuth = async (data) => {
-  //   try {
-  //     alert(data?.id);
-  //     const response = await fetch(
-  //       "https://swipeapi.paradigmacompany.com/accounts/test/",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "Telegram-User-ID": data?.id,
-  //         },
-  //         body: JSON.stringify({
-  //           auth: initData,
-  //         }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       alert("cool");
-  //     } else {
-  //       alert("fuck");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   useEffect(() => {
     const data = tg.initDataUnsafe?.user;
     setUserData(data);
-    // checkAuth(data);
   }, []);
 
   useEffect(() => {
@@ -88,6 +62,7 @@ const Reward = () => {
           headers: {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
+            "Auth": initData
           },
         }
       );
@@ -126,6 +101,7 @@ const Reward = () => {
           headers: {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
+            "Auth": initData
           },
         }
       );
@@ -154,6 +130,7 @@ const Reward = () => {
           headers: {
             "Content-Type": "application/json",
             "Telegram-User-ID": userData?.id,
+            "Auth": initData
           },
           body: JSON.stringify({
             rewarded: 1,
