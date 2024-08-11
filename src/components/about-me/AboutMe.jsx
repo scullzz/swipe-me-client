@@ -37,24 +37,24 @@ const AboutMe = () => {
   const [authData, setAuthData] = useState({});
   const tg = window.Telegram.WebApp;
 
-  useEffect(() => {
-    getUserData();
-  }, []);
-
-  const getUserData = () => {
-    const init = window.Telegram.WebApp.initData;
+  const getUserData = async () => {
+    const init = tg.initData;
     const data = tg.initDataUnsafe?.user || {};
-    console.log("Fetched initData:", init);
-    console.log("Fetched user data:", data);
-    setUserData(data);
+    console.log("initData:", init);
+    console.log("userData:", data);
     setInitData(init);
-    if (data.id) {
-      fetchUserProfilePhoto(data.id);
+    setUserData(data);
+    if (data.id && init.id) {
+      await fetchUserProfilePhoto(data.id);
     }
     if (data.first_name) {
       setFirstLetter(data.first_name.charAt(0));
     }
   };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const fetchUserProfilePhoto = async (userId) => {
     try {
@@ -147,7 +147,7 @@ const AboutMe = () => {
   };
   return (
     <div className={style.AboutBlockMain}>
-      <p>{initData?.id}</p>
+      <p>{initData.id}</p>
       <div className={style.AboutLine}>
         <div className={style.MeBlock}>
           <div className={style.MeAvatar}>
