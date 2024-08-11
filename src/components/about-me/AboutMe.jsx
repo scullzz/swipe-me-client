@@ -119,7 +119,7 @@ const AboutMe = () => {
         "https://swipeapi.paradigmacompany.com/socialmedia/",
         {
           method: "GET",
-          // "Telegram-User-ID": "714092858",
+          "Telegram-User-ID": "714092858",
           Auth: "M1bCSx92W6",
         }
       );
@@ -132,6 +132,7 @@ const AboutMe = () => {
 
   useEffect(() => {
     getTestData();
+    // getSocialLinks();
   }, []);
 
   const NavigationSliderBlock = (ind) => {
