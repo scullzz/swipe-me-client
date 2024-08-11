@@ -25,6 +25,8 @@ const AboutMe = () => {
     arrows: false,
   };
 
+  const initData = window.Telegram.WebApp.initData;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -92,13 +94,13 @@ const AboutMe = () => {
   //test api
   const getTestData = async () => {
     try {
-      const response = await fetch("http://185.250.45.105/accounts/s", {
+      const response = await fetch("http://185.250.45.105/accounts/m", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
           "Telegram-User-ID": userData?.id,
-          "Auth": "M1bCSx92W6",
-        }
+          Auth: initData,
+        },
       });
       const data = await response.json();
       setAuthData(data);
