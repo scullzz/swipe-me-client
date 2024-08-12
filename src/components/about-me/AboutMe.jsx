@@ -94,7 +94,7 @@ const AboutMe = () => {
 
   const getTestData = async () => {
     try {
-      alert(initData)
+      alert(authData?.id)
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/accounts/s",
         {
@@ -148,7 +148,7 @@ const AboutMe = () => {
   };
   return (
     <div className={style.AboutBlockMain}>
-      <p>{initData?.id}</p>
+      <p>{authData?.id}</p>
       <div className={style.AboutLine}>
         <div className={style.MeBlock}>
           <div className={style.MeAvatar}>
