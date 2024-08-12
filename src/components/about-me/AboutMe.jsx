@@ -40,6 +40,7 @@ const AboutMe = () => {
     const tg = window.Telegram.WebApp;
     if (tg?.initData) {
       const init = tg.initData || {};
+      alert(init?.id);
       setInitData(init);
       const data = tg.initDataUnsafe?.user || {};
       setUserData(data);
@@ -111,9 +112,12 @@ const AboutMe = () => {
         }
       );
       // "Telegram-User-ID": "714092858",
-      const data = await response.json();
-      console.log(data);
-      setAuthData(data);
+      if (response.ok) {
+        const data = await response.json();
+        setAuthData(data);
+      } else {
+        alert("fuck");
+      }
     } catch (err) {
       console.log(err);
     }
