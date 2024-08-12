@@ -93,6 +93,7 @@ const AboutMe = () => {
 
   const getTestData = async () => {
     try {
+      alert(userData?.id)
       alert(initData);
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/accounts/s",
