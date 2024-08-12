@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 const AboutMe = () => {
   const tg = window.Telegram.WebApp;
 
-  const [initData, setInitData] = useState({});
+  const [initData, setInitData] = useState(window.Telegram.WebApp.initData);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -72,8 +72,6 @@ const AboutMe = () => {
   };
 
   useEffect(() => {
-    const init = tg.initData || {};
-    setInitData(init);
     getUserData();
   }, []);
 
@@ -94,7 +92,6 @@ const AboutMe = () => {
     text: `10, 4k`,
   }));
 
-  //test api
   const getTestData = async () => {
     try {
       const response = await fetch(
