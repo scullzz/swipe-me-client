@@ -17,8 +17,6 @@ const Navigation = () => {
 
   useEffect(() => {
     const tg = window.Telegram.WebApp;
-    const init = window.Telegram.WebApp.initData;
-    alert(init.id);
     if (tg) {
       tg.expand();
       tg.MainButton.hide();
