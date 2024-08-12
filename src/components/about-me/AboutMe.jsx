@@ -35,19 +35,22 @@ const AboutMe = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   const [firstLetter, setFirstLetter] = useState(null);
   const [authData, setAuthData] = useState({});
-  const tg = window.Telegram.WebApp;
 
   const getUserData = async () => {
-    const init = tg.initData || {};
-    alert(init?.id);
-    const data = tg.initDataUnsafe?.user || {};
-    setInitData(init);
-    setUserData(data);
-    if (data.id && init.id) {
-      await fetchUserProfilePhoto(data.id);
-    }
-    if (data.first_name) {
-      setFirstLetter(data.first_name.charAt(0));
+    const tg = window.Telegram.WebApp;
+    if (tg?.initData) {
+      const init = tg.initData || {};
+      setInitData(init);
+      const data = tg.initDataUnsafe?.user || {};
+      setUserData(data);
+      if (data.id && init.id) {
+        await fetchUserProfilePhoto(data.id);
+      }
+      if (data.first_name) {
+        setFirstLetter(data.first_name.charAt(0));
+      }
+    } else {
+      console.error("Telegram WebApp is not initialized yet");
     }
   };
 
