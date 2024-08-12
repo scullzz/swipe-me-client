@@ -40,6 +40,7 @@ const AboutMe = () => {
 
   const fetchUserProfilePhoto = async (userId) => {
     try {
+      alert("id " + userId);
       const response = await fetch(
         `https://api.telegram.org/bot1682322424:AAEdZRXr0FKSdeqrkG5h4zuHNTZnkuveh_o/getUserProfilePhotos?user_id=${userId}`
       );
@@ -59,9 +60,9 @@ const AboutMe = () => {
     }
   };
 
-  const getUserExtraData = async (id) => {
+  const getUserExtraData = async (userId) => {
     try {
-      alert(id);
+      alert(userId);
       alert(initData);
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/accounts/s",
@@ -69,7 +70,7 @@ const AboutMe = () => {
           method: "GET",
           headers: {
             "Content-type": "application/json",
-            "Telegram-User-ID": id,
+            "Telegram-User-ID": userId,
             Auth: initData,
           },
         }
