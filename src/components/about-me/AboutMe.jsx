@@ -59,11 +59,39 @@ const AboutMe = () => {
     }
   };
 
+  const getUserExtraData = async (id) => {
+    try {
+      alert(userData?.id);
+      alert(initData);
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/accounts/s",
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            "Telegram-User-ID": id,
+            Auth: initData,
+          },
+        }
+      );
+      // "Telegram-User-ID": "714092858",
+      if (response.ok) {
+        const data = await response.json();
+        setAuthData(data);
+      } else {
+        alert("fuck");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getUserData = async () => {
     const data = tg.initDataUnsafe?.user || {};
     setUserData(data);
     if (data.id && init.id) {
       await fetchUserProfilePhoto(data.id);
+      await getUserExtraData(data.id);
     }
     if (data.first_name) {
       setFirstLetter(data.first_name.charAt(0));
@@ -91,33 +119,6 @@ const AboutMe = () => {
     text: `10, 4k`,
   }));
 
-  const getTestData = async () => {
-    try {
-      alert(userData?.id)
-      alert(initData);
-      const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/accounts/s",
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            "Telegram-User-ID": userData?.id,
-            Auth: initData,
-          },
-        }
-      );
-      // "Telegram-User-ID": "714092858",
-      if (response.ok) {
-        const data = await response.json();
-        setAuthData(data);
-      } else {
-        alert("fuck");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const getSocialLinks = async () => {
     try {
       const response = await fetch(
@@ -135,11 +136,6 @@ const AboutMe = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    getTestData();
-    // getSocialLinks();
-  }, []);
 
   const NavigationSliderBlock = (ind) => {
     if (ind === 4) {
