@@ -56,6 +56,7 @@ const Reward = () => {
 
   const getIsSubscribed = async () => {
     try {
+      alert(initData?.id);
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/me/",
         {
@@ -94,7 +95,6 @@ const Reward = () => {
   }, [finalVisible]);
 
   const CheckSubStatus = async () => {
-    alert(initData?.id)
     try {
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/subscribed/",
