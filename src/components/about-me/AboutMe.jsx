@@ -38,10 +38,9 @@ const AboutMe = () => {
   const tg = window.Telegram.WebApp;
 
   const getUserData = async () => {
-    const init = tg.initData;
+    const init = tg.initData || {};
+    alert(init?.id);
     const data = tg.initDataUnsafe?.user || {};
-    console.log("initData:", init);
-    console.log("userData:", data);
     setInitData(init);
     setUserData(data);
     if (data.id && init.id) {
@@ -147,7 +146,7 @@ const AboutMe = () => {
   };
   return (
     <div className={style.AboutBlockMain}>
-      <p>{initData.id}</p>
+      <p>{initData?.id}</p>
       <div className={style.AboutLine}>
         <div className={style.MeBlock}>
           <div className={style.MeAvatar}>
