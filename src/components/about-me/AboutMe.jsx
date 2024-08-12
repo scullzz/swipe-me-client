@@ -16,6 +16,8 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 
 const AboutMe = () => {
+  const tg = window.Telegram.WebApp;
+
   const settings = {
     dots: false,
     infinite: false,
@@ -24,6 +26,10 @@ const AboutMe = () => {
     slidesToScroll: 4,
     arrows: false,
   };
+  useEffect(() => {
+    const init = tg.initData || {};
+    setInitData(init);
+  }, []);
 
   const [initData, setInitData] = useState({});
   const [open, setOpen] = React.useState(false);
@@ -37,32 +43,24 @@ const AboutMe = () => {
   const [authData, setAuthData] = useState({});
 
   const getUserData = async () => {
-    const tg = window.Telegram.WebApp;
-    if (tg?.initData) {
-      const init = tg.initData || {};
-      alert(init?.id);
-      setInitData(init);
-      const data = tg.initDataUnsafe?.user || {};
-      setUserData(data);
-      if (data.id && init.id) {
-        await fetchUserProfilePhoto(data.id);
-      }
-      if (data.first_name) {
-        setFirstLetter(data.first_name.charAt(0));
-      }
-    } else {
-      console.error("Telegram WebApp is not initialized yet");
+    alert(initData?.id);
+    const data = tg.initDataUnsafe?.user || {};
+    setUserData(data);
+    if (data.id && init.id) {
+      await fetchUserProfilePhoto(data.id);
+    }
+    if (data.first_name) {
+      setFirstLetter(data.first_name.charAt(0));
     }
   };
 
-useEffect(() => {
-  if (window.Telegram.WebApp) {
-    getUserData();
-  } else {
-    alert('not have tg')
-  }
-}, [window.Telegram.WebApp]);
-
+  useEffect(() => {
+    if (window.Telegram.WebApp) {
+      getUserData();
+    } else {
+      alert("not have tg");
+    }
+  }, [window.Telegram.WebApp]);
 
   const fetchUserProfilePhoto = async (userId) => {
     try {
