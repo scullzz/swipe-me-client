@@ -120,23 +120,23 @@ const AboutMe = () => {
     text: `10, 4k`,
   }));
 
-  const getSocialLinks = async () => {
-    try {
-      const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/socialmedia/",
-        {
-          method: "GET",
-          headers: {
-            Auth: "M1bCSx92W6",
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getSocialLinks = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://swipeapi.paradigmacompany.com/socialmedia/",
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           Auth: "M1bCSx92W6",
+  //         },
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const NavigationSliderBlock = (ind) => {
     if (ind === 4) {
