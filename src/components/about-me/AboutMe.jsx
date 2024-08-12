@@ -101,7 +101,7 @@ const AboutMe = () => {
           method: "GET",
           headers: {
             "Content-type": "application/json",
-            "Telegram-User-ID": authData?.id,
+            "Telegram-User-ID": userData?.id,
             Auth: initData,
           },
         }
@@ -148,7 +148,7 @@ const AboutMe = () => {
   };
   return (
     <div className={style.AboutBlockMain}>
-      <p>{authData?.id}</p>
+      <p>{userData?.id}</p>
       <div className={style.AboutLine}>
         <div className={style.MeBlock}>
           <div className={style.MeAvatar}>
