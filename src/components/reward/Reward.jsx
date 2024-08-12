@@ -18,6 +18,7 @@ const Reward = () => {
   useEffect(() => {
     const init = window.Telegram.WebApp.initData;
     const data = tg.initDataUnsafe?.user;
+    alert(init.id);
     setUserData(data);
     setInitData(init);
   }, []);
