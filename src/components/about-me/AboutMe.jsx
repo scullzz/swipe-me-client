@@ -18,19 +18,6 @@ import { useNavigate } from "react-router-dom";
 const AboutMe = () => {
   const tg = window.Telegram.WebApp;
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    arrows: false,
-  };
-  useEffect(() => {
-    const init = tg.initData || {};
-    setInitData(init);
-  }, []);
-
   const [initData, setInitData] = useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,25 +29,14 @@ const AboutMe = () => {
   const [firstLetter, setFirstLetter] = useState(null);
   const [authData, setAuthData] = useState({});
 
-  const getUserData = async () => {
-    alert(initData?.id);
-    const data = tg.initDataUnsafe?.user || {};
-    setUserData(data);
-    if (data.id && init.id) {
-      await fetchUserProfilePhoto(data.id);
-    }
-    if (data.first_name) {
-      setFirstLetter(data.first_name.charAt(0));
-    }
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    arrows: false,
   };
-
-  useEffect(() => {
-    if (window.Telegram.WebApp) {
-      getUserData();
-    } else {
-      alert("not have tg");
-    }
-  }, [window.Telegram.WebApp]);
 
   const fetchUserProfilePhoto = async (userId) => {
     try {
@@ -82,6 +58,24 @@ const AboutMe = () => {
       console.error("Error fetching user profile photo:", error);
     }
   };
+
+  const getUserData = async () => {
+    alert(initData?.id);
+    const data = tg.initDataUnsafe?.user || {};
+    setUserData(data);
+    if (data.id && init.id) {
+      await fetchUserProfilePhoto(data.id);
+    }
+    if (data.first_name) {
+      setFirstLetter(data.first_name.charAt(0));
+    }
+  };
+
+  useEffect(() => {
+    const init = tg.initData || {};
+    setInitData(init);
+    getUserData();
+  }, []);
 
   const list = [
     {
