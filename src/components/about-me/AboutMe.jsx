@@ -60,7 +60,6 @@ const AboutMe = () => {
   };
 
   const getUserData = async () => {
-    alert(initData?.id);
     const data = tg.initDataUnsafe?.user || {};
     setUserData(data);
     if (data.id && init.id) {
@@ -94,7 +93,7 @@ const AboutMe = () => {
 
   const getTestData = async () => {
     try {
-      alert(authData?.id)
+      alert(initData);
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/accounts/s",
         {
