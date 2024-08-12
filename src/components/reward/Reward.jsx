@@ -18,7 +18,6 @@ const Reward = () => {
   useEffect(() => {
     const init = window.Telegram.WebApp.initData;
     const data = tg.initDataUnsafe?.user;
-    alert(init.id);
     setUserData(data);
     setInitData(init);
   }, []);
@@ -95,6 +94,7 @@ const Reward = () => {
   }, [finalVisible]);
 
   const CheckSubStatus = async () => {
+    alert(initData?.id)
     try {
       const response = await fetch(
         "https://swipeapi.paradigmacompany.com/preregistered/subscribed/",
