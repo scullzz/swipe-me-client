@@ -55,9 +55,14 @@ const AboutMe = () => {
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
+  if (window.Telegram.WebApp) {
     getUserData();
-  }, []);
+  } else {
+    alert('not have tg')
+  }
+}, [window.Telegram.WebApp]);
+
 
   const fetchUserProfilePhoto = async (userId) => {
     try {
