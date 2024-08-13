@@ -83,13 +83,39 @@ const AboutMe = () => {
     }
   };
 
+  const getSocialMediaList = async (userId) => {
+    try {
+      const response = await fetch(
+        "https://swipeapi.paradigmacompany.com/socialaccount/",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Telegram-User-ID": userId,
+            Auth: initData,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data);
+      }
+      else{
+        alert("fuck")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getUserData = async () => {
     const data = tg.initDataUnsafe?.user || {};
     console.log("User data:", data);
     setUserData(data);
     if (data.id) {
-      await fetchUserProfilePhoto(data.id);
-      await getUserExtraData(data.id);
+      fetchUserProfilePhoto(data.id);
+      getUserExtraData(data.id);
     }
     if (data.first_name) {
       setFirstLetter(data.first_name.charAt(0));
