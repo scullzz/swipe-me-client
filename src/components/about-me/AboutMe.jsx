@@ -116,6 +116,7 @@ const AboutMe = () => {
     if (data.id) {
       fetchUserProfilePhoto(data.id);
       getUserExtraData(data.id);
+      getSocialMediaList(data.id)
     }
     if (data.first_name) {
       setFirstLetter(data.first_name.charAt(0));
