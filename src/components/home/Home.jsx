@@ -43,7 +43,7 @@ const Home = () => {
   const videosApiSrc = async(userId) => {
     try{
       const responce = await fetch(
-        'https://swipeapi.paradigmacompany.com/videos/random/',
+        'https://swipeapi.paradigmacompany.com/videos',
         {
           method: 'GET',
           headers: {
