@@ -16,10 +16,42 @@ import { Mousewheel, Navigation, Pagination } from "swiper/modules";
 SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 const Home = () => {
+  const tg = window.Telegram.WebApp;
+  const [initData, setInitData] = useState(tg.initData);
+
+
+
   const [isMuted, setIsMuted] = useState(false);
   const [selected, setSelected] = useState("Подписки");
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
+
+  const videosApiSrc = async(userId) => {
+    try{
+      const responce = await fetch(
+        'https://swipeapi.paradigmacompany.com/videos/',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Telegram-User-ID': userId,
+            Auth: initData,
+          }
+        }
+      );
+      if(responce.ok){
+        const data = await responce.json();
+        console.log(data);
+        alert(data);
+      }
+      else{
+        alert("fuck")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   const videosSrc = [
     "/videos/cat.mp4",
