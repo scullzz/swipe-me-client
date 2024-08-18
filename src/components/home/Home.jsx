@@ -56,7 +56,7 @@ const Home = () => {
       if(responce.ok){
         const data = await responce.json();
         console.log(data);
-        alert(data[0]);
+        alert(JSON.stringify(data));
       }
       else{
         alert("fuck")
