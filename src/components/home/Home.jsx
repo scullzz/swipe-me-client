@@ -56,7 +56,7 @@ const Home = () => {
       if(responce.ok){
         const data = await responce.json();
         console.log(data);
-        alert(data['video']);
+        alert(data[0]);
       }
       else{
         alert("fuck")
