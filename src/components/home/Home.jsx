@@ -26,20 +26,6 @@ const Home = () => {
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
 
-  const getUserData = async () => {
-    const data = tg.initDataUnsafe?.user || {};
-    console.log("User data:", data);
-    setUserData(data);
-    if (data.id) {
-      fetchUserProfilePhoto(data.id);
-      getUserExtraData(data.id);
-      getSocialMediaList(data.id)
-    }
-    if (data.first_name) {
-      setFirstLetter(data.first_name.charAt(0));
-    }
-  };
-
   const videosApiSrc = async(userId) => {
     try{
       const responce = await fetch(
@@ -82,7 +68,6 @@ const Home = () => {
   useEffect(() => {
     set_sub_video(videosSrc.slice(0, 3));
     set_new_video(videosSrc.slice(3, 6));
-    getUserData();
     videosApiSrc();
   }, []);
 
