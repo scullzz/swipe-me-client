@@ -45,7 +45,7 @@ const Home = () => {
         alert(JSON.stringify(data));
       }
       else{
-        alert(responce);
+        alert(responce.status);
       }
     } catch (err) {
       console.log(err);
