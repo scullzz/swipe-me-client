@@ -45,7 +45,7 @@ const Home = () => {
         alert(JSON.stringify(data));
       }
       else{
-        alert("fuck")
+        alert(responce);
       }
     } catch (err) {
       console.log(err);
