@@ -29,7 +29,7 @@ const Home = () => {
   const videosApiSrc = async(userId) => {
     try{
       const responce = await fetch(
-        'https://swipeapi.paradigmacompany.com/videos',
+        'https://swipeapi.paradigmacompany.com/videos/random',
         {
           method: 'GET',
           headers: {
