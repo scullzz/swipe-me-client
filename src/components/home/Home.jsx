@@ -31,7 +31,7 @@ const Home = () => {
       alert(userId)
       alert(initData)
       const responce = await fetch(
-        'https://swipeapi.paradigmacompany.com/videos/random',
+        'https://swipeapi.paradigmacompany.com/video/random',
         {
           method: 'GET',
           headers: {
