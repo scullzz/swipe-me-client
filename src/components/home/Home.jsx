@@ -28,8 +28,7 @@ const Home = () => {
 
   const videosApiSrc = async(userId) => {
     try{
-      alert(userId)
-      alert(initData)
+      alert(tg.initData)
       const responce = await fetch(
         'https://swipeapi.paradigmacompany.com/videos/random',
         {
