@@ -29,7 +29,7 @@ const Home = () => {
 
   const videosApiSrc = async (userId) => {
     try {
-      alert(tg.userId);
+      alert(userId);
       alert(tg.initData);
 
       const response = await fetch(
@@ -38,7 +38,7 @@ const Home = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Telegram-User-ID': tg.userId,
+            'Telegram-User-ID': userId,
             Auth: tg.initData,
           }
         }
