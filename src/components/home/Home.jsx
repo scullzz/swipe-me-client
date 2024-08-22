@@ -17,19 +17,20 @@ SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 const Home = () => {
   const tg = window.Telegram.WebApp;
-  const [initData, setInitData] = useState(tg.initData);
-
-
-
+  const [initData, setInitData] = useState(tg.initData || '');
   const [isMuted, setIsMuted] = useState(false);
-  const [selected, setSelected] = useState("Подписки");
+  const [selected, setSelected] = useState('Подписки');
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
 
-  const videosApiSrc = async(userId) => {
-    try{
-      alert(tg.initData)
-      const responce = await fetch(
+  useEffect(() => {
+    setInitData(tg.initData);
+  }, [tg]);
+
+  const videosApiSrc = async (userId) => {
+    try {
+      alert(initData);
+      const response = await fetch(
         'https://swipeapi.paradigmacompany.com/videos/random',
         {
           method: 'GET',
@@ -40,16 +41,17 @@ const Home = () => {
           }
         }
       );
-      if(responce.ok){
-        const data = await responce.json();
+
+      if (response.ok) {
+        const data = await response.json();
         console.log(data);
         alert(JSON.stringify(data));
-      }
-      else{
-        alert(responce.status);
+      } else {
+        alert(response.status);
       }
     } catch (err) {
       console.log(err);
+      alert('Error fetching data');
     }
   };
 
