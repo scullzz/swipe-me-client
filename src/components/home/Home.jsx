@@ -27,9 +27,9 @@ const Home = () => {
     setInitData(tg.initData);
   }, [tg]);
 
-  const videosApiSrc = async (userId) => {
+  const videosApiSrc = async () => {
     try {
-      alert(userId);
+      alert(tg.initDataUnsafe.user);
       alert(tg.initData);
 
       const response = await fetch(
@@ -38,7 +38,7 @@ const Home = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Telegram-User-ID': userId,
+            'Telegram-User-ID': tg.initDataUnsafe.user,
             Auth: tg.initData,
           }
         }
