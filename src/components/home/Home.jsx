@@ -17,7 +17,6 @@ SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 const Home = () => {
   const tg = window.Telegram.WebApp;
-  const [initData, setInitData] = useState(tg.initData || '');
   const [isMuted, setIsMuted] = useState(false);
   const [selected, setSelected] = useState('Подписки');
   const [activeSubIndex, setActiveSubIndex] = useState(0);
@@ -39,20 +38,18 @@ const Home = () => {
           headers: {
             'Content-Type': 'application/json',
             'Telegram-User-ID': tg.initDataUnsafe.user.id,
-            Auth: initData,
+            Auth: tg.initData,
           }
         }
       );
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         alert(JSON.stringify(data));
       } else {
         alert(response.status);
       }
     } catch (err) {
-      console.log(err);
       alert('Error fetching data');
     }
   };
