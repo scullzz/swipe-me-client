@@ -21,11 +21,7 @@ const Home = () => {
   const [selected, setSelected] = useState('Подписки');
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
-
-  useEffect(() => {
-    setInitData(tg.initData);
-  }, [tg]);
-
+  
   const videosApiSrc = async () => {
     try {
       alert(tg.initDataUnsafe.user.id);
