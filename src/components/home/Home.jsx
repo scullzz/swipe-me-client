@@ -31,13 +31,13 @@ const Home = () => {
       alert(userId)
       alert(initData)
       const responce = await fetch(
-        'https://swipeapi.paradigmacompany.com/video/random',
+        'https://swipeapi.paradigmacompany.com/videos/random',
         {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Telegram-User-ID': userId,
-            Auth: initData,
+            Auth: tg.initData,
           }
         }
       );
