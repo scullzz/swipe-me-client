@@ -29,7 +29,7 @@ const Home = () => {
 
   const videosApiSrc = async () => {
     try {
-      alert(tg.initDataUnsafe.user);
+      alert(tg.initDataUnsafe.user.id);
       alert(tg.initData);
 
       const response = await fetch(
