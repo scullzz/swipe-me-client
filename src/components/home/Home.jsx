@@ -38,8 +38,8 @@ const Home = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Telegram-User-ID': tg.initDataUnsafe.user,
-            Auth: tg.initData,
+            'Telegram-User-ID': tg.initDataUnsafe.user.id,
+            Auth: initData,
           }
         }
       );
