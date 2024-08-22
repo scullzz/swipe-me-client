@@ -29,14 +29,16 @@ const Home = () => {
 
   const videosApiSrc = async (userId) => {
     try {
-      alert(initData);
+      alert(tg);
+      alert(tg.initData);
+
       const response = await fetch(
         'https://swipeapi.paradigmacompany.com/videos/random',
         {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Telegram-User-ID': userId,
+            'Telegram-User-ID': tg.userId,
             Auth: tg.initData,
           }
         }
