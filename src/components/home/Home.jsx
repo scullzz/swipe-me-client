@@ -22,6 +22,7 @@ const Home = () => {
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
   const [api_videos, setApi_videos] = useState([]);
+  const [likedVideos, setLikedVideos] = useState([]); // Хранение ID лайкнутых видео
 
   const videosApiSrc = async () => {
     try {
@@ -88,7 +89,6 @@ const Home = () => {
       watchTime = videoElement.currentTime;
 
       if (watchTime >= threshold) {
-        // Отправляем запрос на сервер, если просмотрено больше threshold времени
         fetch(`https://swipeapi.paradigmacompany.com/videos/${videoData.id}`, {
           method: 'GET',
           headers: {
@@ -109,6 +109,66 @@ const Home = () => {
     };
 
     videoElement.addEventListener('timeupdate', handleTimeUpdate);
+  };
+
+  const handleLike = async (videoId) => {
+    try {
+      const response = await fetch('https://swipeapi.paradigmacompany.com/video-likes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Telegram-User-ID': tg.initDataUnsafe.user.id,
+          Auth: tg.initData,
+        },
+        body: JSON.stringify({ video: videoId }),
+      });
+
+      if (response.ok) {
+        setLikedVideos([...likedVideos, videoId]); // Добавляем лайкнутое видео в список
+        console.log(`Video ${videoId} liked successfully`);
+      } else {
+        console.error('Error liking video:', response.status);
+      }
+    } catch (err) {
+      console.error('Error liking video:', err);
+    }
+  };
+
+  const handleUnlike = async (videoId) => {
+    try {
+      const response = await fetch('https://swipeapi.paradigmacompany.com/video-likes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Telegram-User-ID': tg.initDataUnsafe.user.id,
+          Auth: tg.initData,
+        },
+        body: JSON.stringify({ video: videoId }),
+      });
+
+      if (response.ok) {
+        setLikedVideos(likedVideos.filter(id => id !== videoId)); // Убираем лайкнутое видео из списка
+        console.log(`Video ${videoId} unliked successfully`);
+      } else {
+        console.error('Error unliking video:', response.status);
+      }
+    } catch (err) {
+      console.error('Error unliking video:', err);
+    }
+  };
+
+  const handleDoubleClickLike = (videoId) => {
+    if (!likedVideos.includes(videoId)) {
+      handleLike(videoId);
+    }
+  };
+
+  const handleLikeButtonClick = (videoId) => {
+    if (likedVideos.includes(videoId)) {
+      handleUnlike(videoId);
+    } else {
+      handleLike(videoId);
+    }
   };
 
   useEffect(() => {
@@ -145,6 +205,7 @@ const Home = () => {
               controls={false}
               className={style.video_player}
               onClick={handleVideoClick}
+              onDoubleClick={() => handleDoubleClickLike(videoData.id)} // Обработка двойного тапа
               playsInline
             />
             <div className={style.overlay_right}>
@@ -161,11 +222,19 @@ const Home = () => {
                 </div>
                 <div className={style.right_btns_wrapper}>
                   <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={heart} alt="heart" className={style.btn_action_icon} />
+                    <button
+                      className={style.overlay_right_content_button}
+                      onClick={() => handleLikeButtonClick(videoData.id)} // Обработка клика на кнопку лайка
+                    >
+                      <img
+                        src={heart}
+                        alt="heart"
+                        className={style.btn_action_icon}
+                        style={{ filter: likedVideos.includes(videoData.id) ? 'grayscale(0%)' : 'grayscale(100%)' }}
+                      />
                     </button>
                     <p className={style.overlay_right_content_part_text}>
-                      {videoData.likes}
+                      {videoData.likes + (likedVideos.includes(videoData.id) ? 1 : 0)}
                     </p>
                   </div>
                   <div className={style.overlay_right_content_part}>
