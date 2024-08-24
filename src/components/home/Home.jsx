@@ -21,7 +21,9 @@ const Home = () => {
   const [selected, setSelected] = useState('Подписки');
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
-  
+  const [api_videos, setApi_videos] = useState([]);
+
+
   const videosApiSrc = async () => {
     try {
       alert(tg.initDataUnsafe.user.id);
@@ -42,6 +44,8 @@ const Home = () => {
       if (response.ok) {
         const data = await response.json();
         alert(JSON.stringify(data));
+        setApi_videos(data.videos);
+        alert(api_videos);
       } else {
         alert(response.status);
       }
