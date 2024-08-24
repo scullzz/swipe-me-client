@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SwiperCore from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 
 import style from "./style.module.css";
+// Импортируйте необходимые изображения и иконки
 import muted_sound_icon from "./images/muted_sound.svg";
 import unmuted_sound_icon from "./images/unmuted_sound.svg";
 import avatar from "./images/avatar.svg";
@@ -22,6 +23,7 @@ const Home = () => {
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
   const [api_videos, setApi_videos] = useState([]);
+  const viewedVideos = useRef({}); // Хранит данные о просмотренных видео
 
   const videosApiSrc = async () => {
     try {
@@ -39,7 +41,7 @@ const Home = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setApi_videos(data); // Устанавливаем полученные данные
+        setApi_videos(data);
       } else {
         alert(response.status);
       }
@@ -80,6 +82,35 @@ const Home = () => {
     }
   };
 
+  const handleVideoTimeUpdate = (videoData) => (e) => {
+    const video = e.target;
+    const viewedTime = video.currentTime;
+
+    const isViewed = viewedVideos.current[videoData.id];
+    const threshold = Math.min(video.duration * 0.1, 1.5); // Минимум 1.5 секунд или 10% от длительности видео
+
+    if (viewedTime >= threshold && !isViewed) {
+      viewedVideos.current[videoData.id] = true;
+
+      // Отправка запроса на сервер о просмотре видео
+      fetch(`https://swipeapi.paradigmacompany.com/videos/${videoData.id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Telegram-User-ID': tg.initDataUnsafe.user.id,
+          Auth: tg.initData,
+        },
+        body: JSON.stringify({ viewedTime: video.currentTime })
+      }).then(response => {
+        if (!response.ok) {
+          console.error("Failed to log video view");
+        }
+      }).catch(error => {
+        console.error("Error logging video view:", error);
+      });
+    }
+  };
+
   useEffect(() => {
     const videos = document.querySelectorAll("video");
     const activeIndex = selected === "Подписки" ? activeSubIndex : activeNewIndex;
@@ -113,6 +144,7 @@ const Home = () => {
               controls={false}
               className={style.video_player}
               onClick={handleVideoClick}
+              onTimeUpdate={handleVideoTimeUpdate(videoData)} // Добавляем обработчик события
               playsInline
               onLoadedData={(e) => {
                 if (index === (selected === "Подписки" ? activeSubIndex : activeNewIndex)) {
@@ -122,56 +154,7 @@ const Home = () => {
                 }
               }}
             />
-            <div className={style.overlay_right}>
-              <div className={style.overlay_right_content}>
-                <div className={style.overlay_right_content_part}>
-                  <a href="">
-                    <button className={style.overlay_right_content_button}>
-                      <img src={avatar} alt="avatar" className={style.right_avatar} />
-                    </button>
-                  </a>
-                  <button className={style.overlay_right_avatar_sub_btn}>
-                    <img src={plus_icon} alt="plus_icon" />
-                  </button>
-                </div>
-                <div className={style.right_btns_wrapper}>
-                  <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={heart} alt="heart" className={style.btn_action_icon} />
-                    </button>
-                    <p className={style.overlay_right_content_part_text}>
-                      {videoData.likes}
-                    </p>
-                  </div>
-                  <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={comments} alt="comments" className={style.btn_action_icon} />
-                    </button>
-                    <p className={style.overlay_right_content_part_text}>
-                      {videoData.comments}
-                    </p>
-                  </div>
-                  <div className={style.overlay_right_content_part}>
-                    <button className={style.overlay_right_content_button}>
-                      <img src={share} alt="share" className={style.btn_action_icon} />
-                    </button>
-                    <p className={style.overlay_right_content_part_text}>
-                      {videoData.shares}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={style.overlay_bottom}>
-              <div className={style.overlay_bottom_content}>
-                <h3 className={style.overlay_video_title}>{videoData.name}</h3>
-                <div className={style.overlay_description_tags}>
-                  <p className={style.overlay_description}>
-                    {videoData.description}
-                  </p>
-                </div>
-              </div>
-            </div>
+            {/* Добавьте необходимый интерфейс для управления и отображения видео */}
           </SwiperSlide>
         ))}
       </Swiper>
