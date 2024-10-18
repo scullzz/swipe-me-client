@@ -16,26 +16,41 @@ import { Mousewheel, Navigation, Pagination } from "swiper/modules";
 SwiperCore.use([Navigation, Pagination, Mousewheel]);
 
 const Home = () => {
+  const tg = window.Telegram.WebApp;
   const [isMuted, setIsMuted] = useState(false);
-  const [selected, setSelected] = useState("Подписки");
+  const [selected, setSelected] = useState('Подписки');
   const [activeSubIndex, setActiveSubIndex] = useState(0);
   const [activeNewIndex, setActiveNewIndex] = useState(0);
+  const [api_videos, setApi_videos] = useState([]);
+  const [likedVideos, setLikedVideos] = useState([]); // Хранение ID лайкнутых видео
 
-  const videosSrc = [
-    "/videos/cat.mp4",
-    "/videos/cat sys admin.mp4",
-    "/videos/saids_defauld_day.mp4",
-    "/videos/sunflower.mp4",
-    "/videos/qwe.mp4",
-    "/videos/brooooo.mp4",
-  ];
+  const videosApiSrc = async () => {
+    try {
+      const response = await fetch(
+        'https://swipeapi.paradigmacompany.com/videos/random',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Telegram-User-ID': tg.initDataUnsafe.user.id,
+            Auth: tg.initData,
+          }
+        }
+      );
 
-  const [sub_video, set_sub_video] = useState([]);
-  const [new_video, set_new_video] = useState([]);
+      if (response.ok) {
+        const data = await response.json();
+        setApi_videos(data); // Устанавливаем полученные данные
+      } else {
+        alert(response.status);
+      }
+    } catch (err) {
+      alert('Error fetching data');
+    }
+  };
 
   useEffect(() => {
-    set_sub_video(videosSrc.slice(0, 3));
-    set_new_video(videosSrc.slice(3, 6));
+    videosApiSrc();
   }, []);
 
   const handleMute = () => {
@@ -60,24 +75,110 @@ const Home = () => {
   const handleVideoClick = (e) => {
     const video = e.target;
     if (video.paused) {
-      video
-        .play()
-        .catch((error) => console.error("Video playback failed", error));
+      video.play().catch((error) => console.error("Video playback failed", error));
     } else {
       video.pause();
     }
   };
 
+  const trackVideoViewing = (videoData, videoElement) => {
+    let watchTime = 0;
+    const threshold = Math.min(1.5, videoElement.duration / 2);
+
+    const handleTimeUpdate = () => {
+      watchTime = videoElement.currentTime;
+
+      if (watchTime >= threshold) {
+        fetch(`https://swipeapi.paradigmacompany.com/videos/${videoData.id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Telegram-User-ID': tg.initDataUnsafe.user.id,
+            Auth: tg.initData,
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log(`Video ${videoData.id} marked as viewed`);
+            }
+          })
+          .catch(err => console.error(`Failed to mark video ${videoData.id} as viewed`, err));
+        
+        videoElement.removeEventListener('timeupdate', handleTimeUpdate);
+      }
+    };
+
+    videoElement.addEventListener('timeupdate', handleTimeUpdate);
+  };
+
+  const handleLike = async (videoId) => {
+    try {
+      const response = await fetch('https://swipeapi.paradigmacompany.com/video-likes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Telegram-User-ID': tg.initDataUnsafe.user.id,
+          Auth: tg.initData,
+        },
+        body: JSON.stringify({ video: videoId }),
+      });
+
+      if (response.ok) {
+        setLikedVideos([...likedVideos, videoId]); // Добавляем лайкнутое видео в список
+        console.log(`Video ${videoId} liked successfully`);
+      } else {
+        console.error('Error liking video:', response.status);
+      }
+    } catch (err) {
+      console.error('Error liking video:', err);
+    }
+  };
+
+  const handleUnlike = async (videoId) => {
+    try {
+      const response = await fetch('https://swipeapi.paradigmacompany.com/video-likes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Telegram-User-ID': tg.initDataUnsafe.user.id,
+          Auth: tg.initData,
+        },
+        body: JSON.stringify({ video: videoId }),
+      });
+
+      if (response.ok) {
+        setLikedVideos(likedVideos.filter(id => id !== videoId)); // Убираем лайкнутое видео из списка
+        console.log(`Video ${videoId} unliked successfully`);
+      } else {
+        console.error('Error unliking video:', response.status);
+      }
+    } catch (err) {
+      console.error('Error unliking video:', err);
+    }
+  };
+
+  const handleDoubleClickLike = (videoId) => {
+    if (!likedVideos.includes(videoId)) {
+      handleLike(videoId);
+    }
+  };
+
+  const handleLikeButtonClick = (videoId) => {
+    if (likedVideos.includes(videoId)) {
+      handleUnlike(videoId);
+    } else {
+      handleLike(videoId);
+    }
+  };
+
   useEffect(() => {
     const videos = document.querySelectorAll("video");
-    const activeIndex =
-      selected === "Подписки" ? activeSubIndex : activeNewIndex;
+    const activeIndex = selected === "Подписки" ? activeSubIndex : activeNewIndex;
     videos.forEach((video, index) => {
       if (index === activeIndex) {
         video.currentTime = 0;
-        video
-          .play()
-          .catch((error) => console.error("Video playback failed", error));
+        video.play().catch((error) => console.error("Video playback failed", error));
+        trackVideoViewing(api_videos[index], video);
       } else {
         video.pause();
         video.currentTime = 0;
@@ -93,117 +194,84 @@ const Home = () => {
         pagination={{ clickable: true }}
         onSlideChange={handleSlideChange}
         initialSlide={selected === "Подписки" ? activeSubIndex : activeNewIndex}
-        key={selected} // this will force re-render on category change
+        key={selected} 
       >
-        {(selected === "Подписки" ? sub_video : new_video).map(
-          (videoSrc, index) => (
-            <SwiperSlide key={index}>
-              <video
-                src={videoSrc}
-                loop={true}
-                muted={isMuted}
-                controls={false}
-                className={style.video_player}
-                onClick={handleVideoClick}
-                playsInline
-                onLoadedData={(e) => {
-                  if (
-                    index ===
-                    (selected === "Подписки" ? activeSubIndex : activeNewIndex)
-                  ) {
-                    e.target
-                      .play()
-                      .catch((error) =>
-                        console.error("Video playback failed", error)
-                      );
-                  }
-                }}
-              />
-              <div className={style.overlay_right}>
-                <div className={style.overlay_right_content}>
-                  <div className={style.overlay_right_content_part}>
-                    <a href="">
-                      <button className={style.overlay_right_content_button}>
-                        <img
-                          src={avatar}
-                          alt="avatar"
-                          className={style.right_avatar}
-                        />
-                      </button>
-                    </a>
-                    <button className={style.overlay_right_avatar_sub_btn}>
-                      <img src={plus_icon} alt="plus_icon" />
+        {api_videos.map((videoData, index) => (
+          <SwiperSlide key={index}>
+            <video
+              src={videoData.video}
+              loop={true}
+              muted={isMuted}
+              controls={false}
+              className={style.video_player}
+              onClick={handleVideoClick}
+              onDoubleClick={() => handleDoubleClickLike(videoData.id)} // Обработка двойного тапа
+              playsInline
+            />
+            <div className={style.overlay_right}>
+              <div className={style.overlay_right_content}>
+                <div className={style.overlay_right_content_part}>
+                  <a href="">
+                    <button className={style.overlay_right_content_button}>
+                      <img src={avatar} alt="avatar" className={style.right_avatar} />
                     </button>
-                  </div>
-                  <div className={style.right_btns_wrapper}>
-                    <div className={style.overlay_right_content_part}>
-                      <button className={style.overlay_right_content_button}>
-                        <img
-                          src={heart}
-                          alt="heart"
-                          className={style.btn_action_icon}
-                        />
-                      </button>
-                      <p className={style.overlay_right_content_part_text}>
-                        11.2M
-                      </p>
-                    </div>
-                    <div className={style.overlay_right_content_part}>
-                      <button className={style.overlay_right_content_button}>
-                        <img
-                          src={comments}
-                          alt="comments"
-                          className={style.btn_action_icon}
-                        />
-                      </button>
-                      <p className={style.overlay_right_content_part_text}>
-                        11.2M
-                      </p>
-                    </div>
-                    <div className={style.overlay_right_content_part}>
-                      <button className={style.overlay_right_content_button}>
-                        <img
-                          src={share}
-                          alt="share"
-                          className={style.btn_action_icon}
-                        />
-                      </button>
-                      <p className={style.overlay_right_content_part_text}>
-                        11.2M
-                      </p>
-                    </div>
-                  </div>
+                  </a>
+                  <button className={style.overlay_right_avatar_sub_btn}>
+                    <img src={plus_icon} alt="plus_icon" />
+                  </button>
                 </div>
-              </div>
-              <div className={style.overlay_bottom}>
-                <div className={style.overlay_bottom_content}>
-                  <h3 className={style.overlay_video_title}>ХАЙП</h3>
-                  <div className={style.overlay_description_tags}>
-                    <p className={style.overlay_description}>
-                      Описание валополпролвапроларпрп
+                <div className={style.right_btns_wrapper}>
+                  <div className={style.overlay_right_content_part}>
+                    <button
+                      className={style.overlay_right_content_button}
+                      onClick={() => handleLikeButtonClick(videoData.id)} // Обработка клика на кнопку лайка
+                    >
+                      <img
+                        src={heart}
+                        alt="heart"
+                        className={style.btn_action_icon}
+                        style={{ filter: likedVideos.includes(videoData.id) ? 'grayscale(0%)' : 'grayscale(100%)' }}
+                      />
+                    </button>
+                    <p className={style.overlay_right_content_part_text}>
+                      {videoData.likes + (likedVideos.includes(videoData.id) ? 1 : 0)}
                     </p>
-                    <ul className={style.overlay_tags}>
-                      <li>
-                        <a href="">#хештег1</a>
-                      </li>
-                      <li>
-                        <a href="">#хештег2</a>
-                      </li>
-                    </ul>
+                  </div>
+                  <div className={style.overlay_right_content_part}>
+                    <button className={style.overlay_right_content_button}>
+                      <img src={comments} alt="comments" className={style.btn_action_icon} />
+                    </button>
+                    <p className={style.overlay_right_content_part_text}>
+                      {videoData.comments}
+                    </p>
+                  </div>
+                  <div className={style.overlay_right_content_part}>
+                    <button className={style.overlay_right_content_button}>
+                      <img src={share} alt="share" className={style.btn_action_icon} />
+                    </button>
+                    <p className={style.overlay_right_content_part_text}>
+                      {videoData.shares}
+                    </p>
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
-          )
-        )}
+            </div>
+            <div className={style.overlay_bottom}>
+              <div className={style.overlay_bottom_content}>
+                <h3 className={style.overlay_video_title}>{videoData.name}</h3>
+                <div className={style.overlay_description_tags}>
+                  <p className={style.overlay_description}>
+                    {videoData.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
       <div className={style.overlay_top}>
         <button className={style.mute_btn} onClick={handleMute}>
-          <img
-            src={isMuted ? muted_sound_icon : unmuted_sound_icon}
-            alt="mute_icon"
-            className={style.btn_action_icon}
-          />
+          <img src={isMuted ? muted_sound_icon : unmuted_sound_icon} alt="mute_icon" className={style.btn_action_icon} />
         </button>
         <div className={style.overlay_top_content}>
           <div className={style.overlay_top_content_selection}>
