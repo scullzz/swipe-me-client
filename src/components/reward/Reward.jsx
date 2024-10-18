@@ -76,6 +76,7 @@ const Reward = () => {
     }
   };
 
+  //...
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTime());
