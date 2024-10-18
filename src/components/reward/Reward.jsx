@@ -57,7 +57,7 @@ const Reward = () => {
   const getIsSubscribed = async () => {
     try {
       const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/preregistered/me/",
+        "https://api.swipemee.ru/preregistered/me/",
         {
           method: "GET",
           headers: {
@@ -96,7 +96,7 @@ const Reward = () => {
   const CheckSubStatus = async () => {
     try {
       const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/preregistered/subscribed/",
+        "https://api.swipemee.ru/preregistered/subscribed/",
         {
           method: "POST",
           headers: {
@@ -125,7 +125,7 @@ const Reward = () => {
       setFinalVisible(true);
 
       const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/preregistered/rewarded/",
+        "https://api.swipemee.ru/preregistered/rewarded/",
         {
           method: "POST",
           headers: {

@@ -28,6 +28,7 @@ const AboutMe = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   const [firstLetter, setFirstLetter] = useState(null);
   const [authData, setAuthData] = useState({});
+  const [socialList, setSocialList] = useState([]);
 
   const settings = {
     dots: false,
@@ -61,17 +62,14 @@ const AboutMe = () => {
 
   const getUserExtraData = async (userId) => {
     try {
-      const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/accounts/s",
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            "Telegram-User-ID": userId,
-            Auth: initData,
-          },
-        }
-      );
+      const response = await fetch("https://api.swipemee.ru/accounts/s", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Telegram-User-ID": userId,
+          Auth: initData,
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         setAuthData(data);
@@ -85,24 +83,20 @@ const AboutMe = () => {
 
   const getSocialMediaList = async (userId) => {
     try {
-      const response = await fetch(
-        "https://swipeapi.paradigmacompany.com/socialaccount/",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Telegram-User-ID": userId,
-            Auth: initData,
-          },
-        }
-      );
+      const response = await fetch("https://api.swipemee.ru/socialaccount/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Telegram-User-ID": userId,
+          Auth: initData,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
-        alert(data);
-      }
-      else{
-        alert("fuck")
+        setSocialList(data);
+      } else {
+        alert("fuck");
       }
     } catch (err) {
       console.log(err);
@@ -116,7 +110,7 @@ const AboutMe = () => {
     if (data.id) {
       fetchUserProfilePhoto(data.id);
       getUserExtraData(data.id);
-      getSocialMediaList(data.id)
+      getSocialMediaList(data.id);
     }
     if (data.first_name) {
       setFirstLetter(data.first_name.charAt(0));
@@ -147,7 +141,7 @@ const AboutMe = () => {
   // const getSocialLinks = async () => {
   //   try {
   //     const response = await fetch(
-  //       "https://swipeapi.paradigmacompany.com/socialmedia/",
+  //       "https://api.swipemee.ru/socialmedia/",
   //       {
   //         method: "GET",
   //         headers: {
@@ -215,6 +209,7 @@ const AboutMe = () => {
         </div>
         <div className={style.SocialBlock}>
           <Slider {...settings} className={style.SocialFlexBlock}>
+            {socialList.map((item, index) => {})}
             {list.map((item, index) => (
               <div
                 className={style.SocialInfoBlock}
